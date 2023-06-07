@@ -1,0 +1,33 @@
+* Nix Starter Kit
+
+** E-Mail-Abwesenheitsnotiz mit sieve
+
+Stand jetzt benötigt man eine Installation von =sieve-connect= auf dem eigenen
+System. Am einfachsten zu installieren via =nix=:
+
+#+begin_src bash
+nix-env -i sieve-connect
+#+end_src
+
+** Abwesenheitsnotiz anpassen
+
+In [[file:sieve/message][message]] ist ein Template zu finden, das entsprechend anpassen.
+
+** Abwesenheitsnotiz aktivieren
+
+Im Ordner =sieve= das Skript =sieve.sh= ausführen:
+
+#+begin_src bash
+./sieve.sh activate
+#+end_src
+
+Hinweis: Beim ersten Mal wird nach einem Username gefragt, das ist der
+LDAP-Name. Dieser wird dann in einer Datei =sieve/username= abgelegt.
+
+** Abwesenheitsnotiz deaktivieren
+
+Im Ordner =sieve= das Skript =sieve.sh= ausführen:
+
+#+begin_src bash
+./sieve.sh deactivate
+#+end_src
