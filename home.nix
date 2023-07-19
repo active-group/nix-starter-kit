@@ -26,6 +26,7 @@ username: {
       pandoc
       ripgrep
       rsync
+      sieve-connect
       sshpass
       subversion
       texinfo
