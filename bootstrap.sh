@@ -19,6 +19,9 @@ nix=/nix/var/nix/profiles/default/bin/nix
 # but is needed by home-manager
 mkdir -p ~/.local/state/nix/profiles
 
+# Set the username
+sed -i "s/<USERNAME>/$(whoami)/" flake.nix
+
 # Install the home-manager configuration
 $nix run home-manager/release-23.05 switch
 

@@ -16,7 +16,7 @@
     flake-utils,
     ...
   }: let
-    username = "<ENTER EXISTING USERNAME HERE>";
+    username = "<USERNAME>";
   in
     flake-utils.lib.eachDefaultSystem (system: {formatter = nixpkgs.legacyPackages.${system}.alejandra;})
     // {
