@@ -1,6 +1,45 @@
-* Nix Starter Kit
+* Nix starter kit
 
-** E-Mail-Abwesenheitsnotiz mit sieve
+NOTE: This setup has only been tested on macOS (=x86_64-darwin=) so far
+and problems might arise on other systems.
+
+** Prerequisites
+
+- =git= (installed on macOS by default)
+- An SSH key for your account on https://gitlab.active-group.de
+- =curl= or =wget= (one of those is installed on most systems by default)
+- =bash= (installed on most systems by default)
+
+** Setup
+
+First you need to clone this repository.  We specify a standard
+location for this to keep setups comparable.  Some commands also make
+use of this default location, so don't change it haphazardly.
+
+#+begin_src shell
+git clone ssh://git@gitlab.active-group.de:1022/ag/nix-starter-kit.git ~/nix-setup
+cd ~/nix-setup
+#+end_src
+
+You should keep and track customizations in your own branch of this
+repository.  This way you can conveniently pull changes done in the
+`main` branch.  Insert your name in the following command:
+
+#+begin_src shell
+git switch -c <YOUR-NAME>
+#+end_src
+
+The following shell script will now install [[https://nixos.org/][the Nix package manager]] on
+your system, and subsequently use that to install some software you
+will probably need.  During execution you will be asked for your
+consent to use `sudo` multiple times (as well as other things), which
+you should then grant.
+
+#+begin_src shell
+./bootstrap.sh
+#+end_src
+
+** E-Mail-Abwesenheitsnotiz mit `sieve`
 
 Stand jetzt benötigt man eine Installation von =sieve-connect= auf dem eigenen
 System. Am einfachsten zu installieren via =nix=:
@@ -9,11 +48,11 @@ System. Am einfachsten zu installieren via =nix=:
 nix-env -i sieve-connect
 #+end_src
 
-** Abwesenheitsnotiz anpassen
+*** Abwesenheitsnotiz anpassen
 
 In [[file:sieve/message][message]] ist ein Template zu finden, das entsprechend anpassen.
 
-** Abwesenheitsnotiz aktivieren
+*** Abwesenheitsnotiz aktivieren
 
 Im Ordner =sieve= das Skript =sieve.sh= ausführen:
 
@@ -24,7 +63,7 @@ Im Ordner =sieve= das Skript =sieve.sh= ausführen:
 Hinweis: Beim ersten Mal wird nach einem Username gefragt, das ist der
 LDAP-Name. Dieser wird dann in einer Datei =sieve/username= abgelegt.
 
-** Abwesenheitsnotiz deaktivieren
+*** Abwesenheitsnotiz deaktivieren
 
 Im Ordner =sieve= das Skript =sieve.sh= ausführen:
 
