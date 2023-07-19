@@ -50,29 +50,44 @@ you should then grant.
 ./bootstrap.sh
 #+end_src
 
-** E-Mail-Abwesenheitsnotiz mit =sieve=
+If it finished successfully, you should close and reopen your current
+terminal instance once.
 
-Stand jetzt benötigt man eine Installation von =sieve-connect= auf dem eigenen
-System.
+** Usage
 
-*** Abwesenheitsnotiz anpassen
+*** Adding software
 
-In [[file:sieve/message][message]] ist ein Template zu finden, das entsprechend anpassen.
+On https://search.nixos.org/packages you can search for packages you'd
+like to have available on your system.  Add the respective packages to
+[[file:home.nix][home.nix]], usually to the list in =packages = with pkgs; [ foo bar ]=.
 
-*** Abwesenheitsnotiz aktivieren
+Note: Sometimes =home-manager= offers a better way of configuring
+programs.  Check =man home-configuration.nix= for details.  If you find
+the software you'd like to use under =programs.foo=, this is the case,
+and you should probably add it like this (instead of under =packages=),
+and also read the options for that program in the manpage.
 
-Im Ordner =sieve= das Skript =sieve.sh= ausführen:
+To "activate" a new configuration, always execute
 
-#+begin_src bash
-./sieve.sh activate
+#+begin_src shell
+home-manager switch
 #+end_src
 
-Hinweis: Beim ersten Mal wird nach einem Username gefragt, das ist der
-LDAP-Name. Dieser wird dann in einer Datei =sieve/username= abgelegt.
+*** Out-of-office notifications via =sieve-connect=
 
-*** Abwesenheitsnotiz deaktivieren
+The file [[file:sieve/message][message]] contains a template for the message you wish to be
+shown.  Fill in your details there before using the script.
 
-Im Ordner =sieve= das Skript =sieve.sh= ausführen:
+To activate the notification, execute
+
+#+begin_src bash
+./sieve/sieve.sh activate
+#+end_src
+
+Note: you will be asked for you IMAP/Sieve username (only) on first
+use.
+
+To deactivate the notifications, execute
 
 #+begin_src bash
 ./sieve.sh deactivate
