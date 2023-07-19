@@ -5,11 +5,35 @@ username: {
 }: {
   home = {
     inherit username;
-    homeDirectory = "/Users/${username}";
+    homeDirectory =
+      if pkgs.stdenv.system == "x86_64-linux"
+      then "/home/${username}"
+      else "/Users/${username}";
 
     sessionVariables = {
       EDITOR = "emacs";
     };
+
+    packages = with pkgs; [
+      curl
+      emacs
+      fd
+      git
+      gnupg
+      gnutls
+      texlive.combined.scheme-full
+      openssh
+      pandoc
+      ripgrep
+      rsync
+      sshpass
+      subversion
+      texinfo
+      unzip
+      wget
+      xz
+      zip
+    ];
 
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
