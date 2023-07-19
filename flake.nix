@@ -15,19 +15,19 @@
     home-manager,
     flake-utils,
     ...
-  }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      username = "<YOUR USERNAME HERE>";
-    in {
+  }: let
+    username = "<ENTER EXISTING USERNAME HERE>";
+  in
+    flake-utils.lib.eachDefaultSystem (system: {formatter = nixpkgs.legacyPackages.${system}.alejandra;})
+    // {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = import nixpkgs {
+          # Change to your system architecture here, for instance to
+          # x86_64-linux, or aarch64-darwin
+          system = "x86_64-darwin";
+          config.allowUnfree = true;
+        };
         modules = [(import ./home.nix username)];
       };
-
-      formatter = pkgs.alejandra;
-    });
+    };
 }
