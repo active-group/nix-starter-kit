@@ -1,11 +1,14 @@
 * Nix starter kit
 
-NOTE: This setup has only been tested on macOS (=x86_64-darwin=) so far
-and problems might arise on other systems.
+NOTE: This setup has only been tested on macOS (=x86_64-darwin=) so far.
+If you need it on any other architecture/OS, talk to Johannes and
+we'll adapt it accordingly.
 
 ** Prerequisites
 
-- =git= (installed on macOS by default)
+- =git= (installed on macOS by default, but you will be prompted to
+  install the XCode command line tools on first use, which you need to
+  allow)
 - An SSH key for your account on https://gitlab.active-group.de
 - =curl= or =wget= (one of those is installed on most systems by default)
 - =bash= (installed on most systems by default)
@@ -13,17 +16,17 @@ and problems might arise on other systems.
 ** Setup
 
 First you need to clone this repository.  We specify a standard
-location for this to keep setups comparable.  Some commands also make
-use of this default location, so don't change it haphazardly.
+location for this to keep setups comparable, and to enable
+=home-manager= to work with slightly simpler commands.
 
 #+begin_src shell
-git clone ssh://git@gitlab.active-group.de:1022/ag/nix-starter-kit.git ~/nix-setup
-cd ~/nix-setup
+git clone ssh://git@gitlab.active-group.de:1022/ag/nix-starter-kit.git ~/.config/home-manager
+cd ~/.config/home-manager
 #+end_src
 
 You should keep and track customizations in your own branch of this
 repository.  This way you can conveniently pull changes done in the
-`main` branch.  Insert your name in the following command:
+=main= branch.  Insert your name in the following command:
 
 #+begin_src shell
 git switch -c <YOUR-NAME>
@@ -32,21 +35,17 @@ git switch -c <YOUR-NAME>
 The following shell script will now install [[https://nixos.org/][the Nix package manager]] on
 your system, and subsequently use that to install some software you
 will probably need.  During execution you will be asked for your
-consent to use `sudo` multiple times (as well as other things), which
+consent to use =sudo= multiple times (as well as other things), which
 you should then grant.
 
 #+begin_src shell
 ./bootstrap.sh
 #+end_src
 
-** E-Mail-Abwesenheitsnotiz mit `sieve`
+** E-Mail-Abwesenheitsnotiz mit =sieve=
 
 Stand jetzt benötigt man eine Installation von =sieve-connect= auf dem eigenen
-System. Am einfachsten zu installieren via =nix=:
-
-#+begin_src bash
-nix-env -i sieve-connect
-#+end_src
+System.
 
 *** Abwesenheitsnotiz anpassen
 
