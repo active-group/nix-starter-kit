@@ -32,6 +32,14 @@ repository.  This way you can conveniently pull changes done in the
 git switch -c <YOUR-NAME>
 #+end_src
 
+In [[file:flake.nix][flake.nix]] change the line
+
+#+begin_example
+system = "x86_64-darwin";
+#+end_example
+
+to your respective system, according to the comment in the file.
+
 The following shell script will now install [[https://nixos.org/][the Nix package manager]] on
 your system, and subsequently use that to install some software you
 will probably need.  During execution you will be asked for your
