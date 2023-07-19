@@ -15,11 +15,9 @@ echo 'experimental-features = nix-command flakes' > ~/.config/nix/nix.conf
 # environment is not sourced yet
 nix=/nix/var/nix/profiles/default/bin/nix
 
-# Execute a dummy nix command to 1) test the installation, and 2) to
-# have nix create necessary symlinks without which it will fail on the
-# next step.  This needs to be something other than `nix run`
-# apparently.
-$nix shell nixpkgs#cowsay -c cowsay Everything up and running, nice!
+# This directory is not automatically created by the Nix installer,
+# but is needed by home-manager
+mkdir -p ~/.local/state/nix/profiles
 
 # Install the home-manager configuration
 $nix run home-manager/release-23.05 switch
