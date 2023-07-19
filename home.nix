@@ -15,6 +15,7 @@ username: {
     };
 
     packages = with pkgs; [
+      bat
       curl
       emacs
       fd
