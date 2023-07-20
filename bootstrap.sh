@@ -20,7 +20,11 @@ nix=/nix/var/nix/profiles/default/bin/nix
 mkdir -p ~/.local/state/nix/profiles
 
 # Set the username
-sed -i "s/<USERNAME>/$(whoami)/" flake.nix
+if [ "$(uname -s)" = "Darwin" ]; then
+    sed -i "" "s/<USERNAME>/$(whoami)/" flake.nix
+else
+    sed -i "s/<USERNAME>/$(whoami)/" flake.nix
+fi
 
 # Install the home-manager configuration
 $nix run home-manager/release-23.05 switch
