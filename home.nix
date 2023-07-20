@@ -52,6 +52,17 @@ username: {
 
   programs = {
     fish.enable = true;
+    git = {
+      # FIXME: Change to your own credentials
+      userName = "still empty";
+      userEmail = "still.empty@active-group.de";
+      ignores = [ ".DS_Store" "*~" "\\#*\\#" ".\\#*" ];
+      extraConfig = {
+        core.askPass = "";
+        init.defaultBranch = "main";
+        submodule.recurse = true;
+      };
+    };
     home-manager.enable = true;
     nix-index = {
       enable = true;
