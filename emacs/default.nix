@@ -21,6 +21,7 @@
         p.marginalia
         p.exec-path-from-shell
         p.ledger-mode
+        p.magit
       ]);
     in [myEmacs];
   };

@@ -193,3 +193,7 @@ disables all other enabled themes."
 ;;; disable this on
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+;;; Magit
+(use-package magit
+  :defer t)
