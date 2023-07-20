@@ -53,6 +53,15 @@ you should then grant.
 If it finished successfully, you should close and reopen your current
 terminal instance once.
 
+Now you should search for =FIXME= in all the files here, fill in
+personal details, then rebuild your configuration:
+
+#+begin_src shell
+rg FIXME
+# Now edit and remove the FIXMEs
+home-manager switch
+#+end_src
+
 ** Usage
 
 *** Adding software
