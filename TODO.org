@@ -1,6 +1,3 @@
 * Todos
-** Emacs-Config
-** =git= einfach konfigurierbar
 ** =sieve= als App
-** Thunderbird?
 ** =fish= als Default-Shell?
