@@ -53,5 +53,11 @@ username: {
   programs = {
     fish.enable = true;
     home-manager.enable = true;
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
   };
 }
