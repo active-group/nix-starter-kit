@@ -3,6 +3,8 @@ username: {
   pkgs,
   ...
 }: {
+  imports = [./emacs];
+
   home = {
     inherit username;
     homeDirectory =
@@ -15,8 +17,6 @@ username: {
       VISUAL = EDITOR;
       ALTERNATE_EDITOR = "";
     };
-
-    imports = [./emacs];
 
     packages = with pkgs; [
       bat
