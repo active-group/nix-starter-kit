@@ -188,3 +188,8 @@ disables all other enabled themes."
           custom-enabled-themes)
     (princ name)
     (load-theme name t)))
+
+;;; Work around some issues with PATH on macOS.  You might want to
+;;; disable this on
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
