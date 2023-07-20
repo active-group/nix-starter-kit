@@ -59,5 +59,17 @@ username: {
       enableZshIntegration = true;
       enableBashIntegration = true;
     };
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableAutosuggestions = true;
+      # Fallback for when macOS upgrades inevitably destroy the
+      # relevant section of /etc/zshrc
+      initExtra = ''
+        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        fi
+      '';
+    };
   };
 }
