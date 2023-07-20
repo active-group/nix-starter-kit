@@ -163,3 +163,28 @@
 
 (use-package marginalia
   :init (marginalia-mode))
+
+;;; Use a nice, dark theme
+(load-theme 'wombat)
+
+;; Easier switching of themes.  Use M-x switch-theme
+(defun available-themes ()
+  "Get a list of the names of all available themes, excluding the
+currently enabled one(s)."
+  (mapcar #'symbol-name
+          (seq-difference (custom-available-themes)
+                          custom-enabled-themes)))
+
+(defun switch-theme (name)
+  "Switch themes interactively.  Similar to `load-theme' but also
+disables all other enabled themes."
+  (interactive
+   (list (intern
+          (completing-read
+           "Theme: "
+           (available-themes)))))
+  (progn
+    (mapc #'disable-theme
+          custom-enabled-themes)
+    (princ name)
+    (load-theme name t)))
