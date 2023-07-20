@@ -6,18 +6,21 @@ username: {
   home = {
     inherit username;
     homeDirectory =
-      if pkgs.stdenv.system == "x86_64-linux"
-      then "/home/${username}"
-      else "/Users/${username}";
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then "/Users/${username}"
+      else "/home/${username}";
 
-    sessionVariables = {
+    sessionVariables = rec {
       EDITOR = "emacs";
+      VISUAL = EDITOR;
+      ALTERNATE_EDITOR = "";
     };
+
+    imports = [./emacs];
 
     packages = with pkgs; [
       bat
       curl
-      emacs
       fd
       git
       gnupg
