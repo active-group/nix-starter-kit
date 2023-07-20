@@ -64,6 +64,14 @@ username: {
       };
     };
     home-manager.enable = true;
+    kitty = {
+      enable = true;
+      shellIntegration.mode = "disabled";
+      settings = {
+        shell = "${pkgs.lib.getExe pkgs.fish}";
+        enable_audio_bell = "no";
+      };
+    };
     nix-index = {
       enable = true;
       enableFishIntegration = true;
