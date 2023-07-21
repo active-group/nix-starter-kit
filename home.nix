@@ -58,6 +58,9 @@ username: {
             source /nix/var/nix/profiles/default/etc/profile.d/etc/nix-daemon.fish
         end
       '';
+      shellAbbrs = {
+        home = "cd ~/.config/home-manager";
+      };
     };
     git = {
       # FIXME: Change to your own credentials
