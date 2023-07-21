@@ -51,7 +51,14 @@ username: {
   };
 
   programs = {
-    fish.enable = true;
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
+        if test -e /nix/var/nix/profiles/default/etc/profile.d/etc/nix-daemon.fish
+            source /nix/var/nix/profiles/default/etc/profile.d/etc/nix-daemon.fish
+        end
+      '';
+    };
     git = {
       # FIXME: Change to your own credentials
       userName = "still empty";
