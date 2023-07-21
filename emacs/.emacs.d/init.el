@@ -197,3 +197,9 @@ disables all other enabled themes."
 ;;; Magit
 (use-package magit
   :defer t)
+
+;;; Session restore after restart
+(desktop-save-mode)
+
+;;; Switch window with Control-TAB
+(global-set-key [C-tab] 'other-window)
