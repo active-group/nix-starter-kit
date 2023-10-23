@@ -17,17 +17,17 @@
     ...
   }: let
     username = "<USERNAME>";
-  in
-    flake-utils.lib.eachDefaultSystem (system: {formatter = nixpkgs.legacyPackages.${system}.alejandra;})
-    // {
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          # Change to your system architecture here, for instance to
-          # x86_64-linux, or aarch64-darwin
-          system = "x86_64-darwin";
-          config.allowUnfree = true;
-        };
-        modules = [(import ./home.nix username)];
-      };
+    # Change to your system architecture here; common values are
+    # "x86_64-darwin", "aarch64-darwin", or "x86_64-linux"
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
     };
+  in {
+    homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+      modules = [(import ./home.nix username)];
+    };
+    formatter.${system} = pkgs.alejandra;
+  };
 }
