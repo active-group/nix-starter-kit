@@ -4,9 +4,12 @@
   ...
 }: {
   home = {
-    file.".emacs.d" = {
-      source = ./.emacs.d;
-      recursive = true;
+    activation = {
+      symlinkDotEmacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          if [ ! -e $HOME/.emacs.d ]; then
+            $DRY_RUN_CMD ln -snf $HOME/.config/home-manager/emacs/.emacs.d $HOME/.emacs.d
+          fi
+        '';
     };
 
     packages = let
