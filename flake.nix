@@ -10,7 +10,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
+  outputs = inputs@{
     nixpkgs,
     home-manager,
     flake-utils,
@@ -27,7 +27,7 @@
   in {
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       modules = [(import ./home.nix username)];
-      extraSpecialArgs = {hm = home-manager.lib;};
+      extraSpecialArgs = {inherit inputs;};
     };
     formatter.${system} = pkgs.alejandra;
   };

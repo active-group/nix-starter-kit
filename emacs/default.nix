@@ -1,12 +1,12 @@
 {
   config,
   pkgs,
-  hm,
+  inputs,
   ...
 }: {
   home = {
     activation = {
-      symlinkDotEmacs = hm.dag.entryAfter [ "writeBoundary" ] ''
+      symlinkDotEmacs = inputs.home-manager.lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -e $HOME/.emacs.d ]; then
             $DRY_RUN_CMD ln -snf $HOME/.config/home-manager/emacs/.emacs.d $HOME/.emacs.d
           fi
