@@ -27,6 +27,7 @@
   in {
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       modules = [(import ./home.nix username)];
+      extraSpecialArgs = {hm = home-manager.lib;};
     };
     formatter.${system} = pkgs.alejandra;
   };
