@@ -94,7 +94,7 @@ To activate the notification, execute
 #+end_src
 
 Note: you will be asked for you IMAP/Sieve username (only) on first
-use.
+use. This is your mail address, not your LDAP user name.
 
 To deactivate the notifications, execute
 
