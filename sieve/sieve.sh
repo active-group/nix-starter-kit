@@ -14,7 +14,7 @@ username=$(cat "$username_file")
 
 case "$1" in
     "activate")
-        sieve-connect -s imap.active-group.de -u "$username" --exec ./upload_and_activate
+        sieve-connect -s mail.active-group.de -u "$username" --exec ./upload_and_activate
         echo
         echo "------------------------------------------------------------"
         echo "    The following out-of-office message is now *active*:"
