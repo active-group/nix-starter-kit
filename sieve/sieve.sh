@@ -23,7 +23,7 @@ case "$1" in
         cat ./message
         ;;
     "deactivate")
-        sieve-connect -s imap.active-group.de -u "$username" --deactivate
+        sieve-connect -s mail.active-group.de -u "$username" --deactivate
         echo "----------------------------------------------------"
         echo "    Out-of-office message has been *deactivated*"
         echo "----------------------------------------------------"
