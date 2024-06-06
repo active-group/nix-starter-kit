@@ -57,7 +57,7 @@
 
 ;; FIXME: adapt to your personal file paths here
 (setq org-log-done 'time
-      org-read-date-popup-calendar nil
+      org-read-date-popup-calendar t
       org-refile-use-outline-path t
       org-refile-targets '((nil . (:maxlevel . 3)))
       org-agenda-files '("~/Desktop/todos.org")
