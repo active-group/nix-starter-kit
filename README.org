@@ -99,5 +99,5 @@ use. This is your mail address, not your LDAP user name.
 To deactivate the notifications, execute
 
 #+begin_src bash
-./sieve.sh deactivate
+./sieve/sieve.sh deactivate
 #+end_src
