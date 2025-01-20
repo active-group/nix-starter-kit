@@ -1,21 +1,25 @@
-username: {
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [./emacs];
+{ ... }:
+
+let
+  settings = import ./user-settings.nix;
+  pkgs = import (
+    fetchTarball "https://github.com/NixOS/nixpkgs/archive/release-24.11.tar.gz"
+  );
+in
+{
+  imports = [ ./emacs ];
 
   home = {
-    inherit username;
+    inherit (settings) username;
     homeDirectory =
-      if pkgs.stdenv.hostPlatform.isDarwin
-      then "/Users/${username}"
-      else "/home/${username}";
+      if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
 
     sessionVariables = rec {
       EDITOR = "emacs";
       VISUAL = EDITOR;
       ALTERNATE_EDITOR = "";
+      # NOTE: We assume that the howto directory sits at ~/howto!
+      TEXINPUTS = "${homeDirectory}/howto/tex:";
     };
 
     packages = with pkgs; [
@@ -47,7 +51,7 @@ username: {
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
-    stateVersion = "23.05"; # Please read the comment before changing.
+    stateVersion = "24.11"; # Please read the comment before changing.
   };
 
   programs = {
@@ -66,7 +70,12 @@ username: {
       # FIXME: Change to your own credentials
       userName = "still empty";
       userEmail = "still.empty@active-group.de";
-      ignores = [ ".DS_Store" "*~" "\\#*\\#" ".\\#*" ];
+      ignores = [
+        ".DS_Store"
+        "*~"
+        "\\#*\\#"
+        ".\\#*"
+      ];
       extraConfig = {
         core.askPass = "";
         init.defaultBranch = "main";
