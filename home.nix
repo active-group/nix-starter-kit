@@ -1,21 +1,23 @@
-username: {
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [./emacs];
+{ ... }:
 
-  home = {
-    inherit username;
+let
+  settings = import ./user-settings.nix;
+  pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/release-24.11.tar.gz") { };
+in
+{
+  imports = [ ./emacs ];
+
+  home = rec {
+    inherit (settings) username;
     homeDirectory =
-      if pkgs.stdenv.hostPlatform.isDarwin
-      then "/Users/${username}"
-      else "/home/${username}";
+      if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
 
     sessionVariables = rec {
       EDITOR = "emacs";
       VISUAL = EDITOR;
       ALTERNATE_EDITOR = "";
+      # NOTE: We assume that the howto directory sits at ~/howto!
+      TEXINPUTS = "${homeDirectory}/howto/tex:";
     };
 
     packages = with pkgs; [
@@ -25,7 +27,8 @@ username: {
       git
       gnupg
       gnutls
-      texlive.combined.scheme-full
+      home-manager
+      nixVersions.latest
       openssh
       pandoc
       ripgrep
@@ -34,6 +37,7 @@ username: {
       sshpass
       subversion
       texinfo
+      texlive.combined.scheme-full
       unzip
       wget
       xz
@@ -47,7 +51,7 @@ username: {
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
-    stateVersion = "23.05"; # Please read the comment before changing.
+    stateVersion = "24.11"; # Please read the comment before changing.
   };
 
   programs = {
@@ -66,14 +70,18 @@ username: {
       # FIXME: Change to your own credentials
       userName = "still empty";
       userEmail = "still.empty@active-group.de";
-      ignores = [ ".DS_Store" "*~" "\\#*\\#" ".\\#*" ];
+      ignores = [
+        ".DS_Store"
+        "*~"
+        "\\#*\\#"
+        ".\\#*"
+      ];
       extraConfig = {
         core.askPass = "";
         init.defaultBranch = "main";
         submodule.recurse = true;
       };
     };
-    home-manager.enable = true;
     kitty = {
       enable = true;
       shellIntegration.mode = "disabled";
@@ -87,18 +95,6 @@ username: {
       enableFishIntegration = true;
       enableZshIntegration = true;
       enableBashIntegration = true;
-    };
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      enableAutosuggestions = true;
-      # Fallback for when macOS upgrades inevitably destroy the
-      # relevant section of /etc/zshrc
-      initExtra = ''
-        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-        fi
-      '';
     };
   };
 }
