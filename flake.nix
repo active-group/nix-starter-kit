@@ -26,7 +26,6 @@
     };
   in {
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
       modules = [(import ./home.nix username)];
       extraSpecialArgs = {inherit inputs;};
     };
