@@ -2,7 +2,11 @@
 
 let
   settings = import ./user-settings.nix;
-  pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/release-24.11.tar.gz") { };
+  stateVersion = settings.stateVersion or "24.11";
+  nixpkgs =
+    settings.nixpkgs
+      or (fetchTarball "https://github.com/NixOS/nixpkgs/archive/release-${stateVersion}.tar.gz");
+  pkgs = import nixpkgs { };
 in
 {
   imports = [ ./emacs ];
@@ -20,38 +24,33 @@ in
       TEXINPUTS = "${homeDirectory}/howto/tex:";
     };
 
-    packages = with pkgs; [
-      bat
-      curl
-      fd
-      git
-      gnupg
-      gnutls
-      home-manager
-      nixVersions.latest
-      openssh
-      pandoc
-      ripgrep
-      rsync
-      sieve-connect
-      sshpass
-      subversion
-      texinfo
-      texlive.combined.scheme-full
-      unzip
-      wget
-      xz
-      zip
-    ];
+    packages =
+      (settings.additionalPackages pkgs)
+      ++ (with pkgs; [
+        bat
+        curl
+        fd
+        git
+        gnupg
+        gnutls
+        home-manager
+        nixVersions.latest
+        openssh
+        pandoc
+        ripgrep
+        rsync
+        sieve-connect
+        sshpass
+        subversion
+        texinfo
+        texlive.combined.scheme-full
+        unzip
+        wget
+        xz
+        zip
+      ]);
 
-    # This value determines the Home Manager release that your configuration is
-    # compatible with. This helps avoid breakage when a new Home Manager release
-    # introduces backwards incompatible changes.
-    #
-    # You should not change this value, even if you update Home Manager. If you do
-    # want to update the value, then make sure to first check the Home Manager
-    # release notes.
-    stateVersion = "24.11"; # Please read the comment before changing.
+    inherit stateVersion;
   };
 
   programs = {
@@ -67,9 +66,8 @@ in
       };
     };
     git = {
-      # FIXME: Change to your own credentials
-      userName = "still empty";
-      userEmail = "still.empty@active-group.de";
+      userName = settings.userFullName;
+      userEmail = settings.email;
       ignores = [
         ".DS_Store"
         "*~"
@@ -81,20 +79,6 @@ in
         init.defaultBranch = "main";
         submodule.recurse = true;
       };
-    };
-    kitty = {
-      enable = true;
-      shellIntegration.mode = "disabled";
-      settings = {
-        shell = "${pkgs.lib.getExe pkgs.fish}";
-        enable_audio_bell = "no";
-      };
-    };
-    nix-index = {
-      enable = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
     };
   };
 }

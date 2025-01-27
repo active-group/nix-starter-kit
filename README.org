@@ -1,80 +1,32 @@
 * Nix starter kit
 
-NOTE: This setup has only been tested on macOS (=x86_64-darwin=) so far.
-If you need it on any other architecture/OS, talk to Johannes and
-we'll adapt it accordingly.
+NOTE: This setup has only been tested on macOS (=x86_64-darwin=) so far. If you
+need it on any other architecture/OS, talk to Johannes and we'll adapt it
+accordingly.
 
-** Prerequisites
+** Provisioning a fresh system
 
-- =git= (installed on macOS by default, but you will be prompted to
-  install the XCode command line tools on first use, which you need to
-  allow)
-- An SSH key for your account on https://gitlab.active-group.de
-- =curl= or =wget= (one of those is installed on most systems by default)
-- =bash= (installed on most systems by default)
-
-** Setup
-
-First you need to clone this repository.  We specify a standard
-location for this to keep setups comparable, and to enable
-=home-manager= to work with slightly simpler commands.
-
+1. Install the [[https://nixos.org][Nix package manager]] on the target
+2. Create a "release" tarball locally by running
+   ~./create_bootstrapping_tarball.sh~
+3. On the target system, extract this archive to ~~/.config/home-manager~, for
+   instance:
 #+begin_src shell
-git clone ssh://git@gitlab.active-group.de:1022/ag/nix-starter-kit.git ~/.config/home-manager
+mkdir -p ~/.config/home-manager
 cd ~/.config/home-manager
+tar xvf <path/to>/nix-starter-kit.tar.xz
 #+end_src
-
-You should keep and track customizations in your own branch of this
-repository.  This way you can conveniently pull changes done in the
-=main= branch.  Insert your name in the following command:
-
-#+begin_src shell
-git switch -c <YOUR-NAME>
-#+end_src
-
-In [[file:flake.nix][flake.nix]] change the line
-
-#+begin_example
-system = "x86_64-darwin";
-#+end_example
-
-to your respective system, according to the comment in the file.
-
-The following shell script will now install [[https://nixos.org/][the Nix package manager]] on
-your system, and subsequently use that to install some software you
-will probably need.  During execution you will be asked for your
-consent to use =sudo= multiple times (as well as other things), which
-you should then grant.
-
-#+begin_src shell
-./bootstrap.sh
-#+end_src
-
-If it finished successfully, you should close and reopen your current
-terminal instance once.
-
-Now you should search for =FIXME= in all the files here, fill in
-personal details, then rebuild your configuration:
-
-#+begin_src shell
-rg FIXME
-# Now edit and remove the FIXMEs
-home-manager switch
-#+end_src
+4. ~cp user-settings.nix.template user-settings~
+5. ~vi user-settings.nix~ und ausfüllen
+6. Run ~./bootstrap.sh~
 
 ** Usage
 
 *** Adding software
 
-On https://search.nixos.org/packages you can search for packages you'd
-like to have available on your system.  Add the respective packages to
-[[file:home.nix][home.nix]], usually to the list in =packages = with pkgs; [ foo bar ]=.
-
-Note: Sometimes =home-manager= offers a better way of configuring
-programs.  Check =man home-configuration.nix= for details.  If you find
-the software you'd like to use under =programs.foo=, this is the case,
-and you should probably add it like this (instead of under =packages=),
-and also read the options for that program in the manpage.
+On https://search.nixos.org/packages you can search for packages you'd like to
+have available on your system. Add those packages to your =user-settings.nix= in
+the respective list.
 
 To "activate" a new configuration, always execute
 
@@ -84,8 +36,8 @@ home-manager switch
 
 *** Out-of-office notifications via =sieve-connect=
 
-The file [[file:sieve/message][message]] contains a template for the message you wish to be
-shown.  Fill in your details there before using the script.
+The file [[file:sieve/message][message]] contains a template for the message you wish to be shown. Fill
+in your details there before using the script.
 
 To activate the notification, execute
 
@@ -93,11 +45,15 @@ To activate the notification, execute
 ./sieve/sieve.sh activate
 #+end_src
 
-Note: you will be asked for you IMAP/Sieve username (only) on first
-use. This is your mail address, not your LDAP user name.
+Note: you will be asked for you IMAP/Sieve username (only) on first use. This is
+your mail address, not your LDAP user name.
 
 To deactivate the notifications, execute
 
 #+begin_src bash
 ./sieve/sieve.sh deactivate
 #+end_src
+
+# Local Variables:
+# fill-column: 80
+# End:
