@@ -9,6 +9,7 @@ let
   pkgs = import nixpkgs { };
 in
 {
+  extraSpecialArgs = { inherit settings; };
   imports = settings.additionalModules;
 
   home = rec {
