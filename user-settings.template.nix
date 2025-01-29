@@ -9,4 +9,7 @@
   additionalModules = settings: [
     # (import ./emacs settings)
   ];
+  additionalEmacsPackages = p: [
+    # p.ivy
+  ];
 }
