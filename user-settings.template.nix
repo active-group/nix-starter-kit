@@ -6,4 +6,7 @@
   additionalPackages = pkgs: [
     # pkgs.mercurial
   ];
+  additionalModules = [
+    # ./emacs
+  ];
 }

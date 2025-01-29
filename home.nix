@@ -9,7 +9,7 @@ let
   pkgs = import nixpkgs { };
 in
 {
-  imports = [ ./emacs ];
+  imports = settings.additionalModules;
 
   home = rec {
     inherit (settings) username;
