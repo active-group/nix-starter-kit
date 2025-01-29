@@ -6,7 +6,7 @@
   additionalPackages = pkgs: [
     # pkgs.mercurial
   ];
-  additionalModules = [
-    # ./emacs
+  additionalModules = settings: [
+    # (import ./emacs settings)
   ];
 }

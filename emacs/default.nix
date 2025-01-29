@@ -1,8 +1,8 @@
+settings:
 {
   config,
   pkgs,
   lib,
-  settings,
   ...
 }:
 {

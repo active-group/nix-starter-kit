@@ -10,7 +10,7 @@ let
 in
 {
   extraSpecialArgs = { inherit settings; };
-  imports = settings.additionalModules;
+  imports = settings.additionalModules settings;
 
   home = rec {
     inherit (settings) username;
