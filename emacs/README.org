@@ -1,0 +1,26 @@
+* Emacs
+
+To use this module, add it to your =additionalModules= in =user-settings.nix=:
+
+#+begin_src nix
+additionalModules = settings: [
+  (import ./emacs settings)
+]
+#+end_src
+
+Then use ~home-manager switch~ to install Emacs on your system.
+
+To make use of some common configuration that we've written, execute the
+following code in a shell to create a reasonble starting point:
+
+#+begin_src shell
+mkdir -p ~/.emacs.d
+cp -L ~/.config/ag-emacs/example-init.el ~/.emacs.d/init.el
+chmod 600 ~/.emacs.d/init.el
+#+end_src
+
+** Adding packages
+
+We use =nixpkgs= to manage the packages Emacs comes equipped with. If you need
+additional packages, use the =additionalEmacsPackages= attribute in
+=user-settings.nix=.
