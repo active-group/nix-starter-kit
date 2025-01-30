@@ -1,0 +1,14 @@
+# zsh
+
+Especially on macOS it might be useful to configure its default shell, =zsh=, to
+work well with Nix and maybe dispatch to the easier-to-use-by-default shell =fish=
+when used interactively.
+
+(NOTE: if you have an existing =~/.zshrc= file that you wish to keep, don't do the
+following; I trust that you should know what you're doing already in this case.)
+
+Install our example =zsh= configuration file:
+
+#+begin_src shell
+cp ~/.config/home-manager/zsh/example-zshrc ~/.zshrc
+#+end_src
