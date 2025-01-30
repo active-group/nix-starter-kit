@@ -4,8 +4,10 @@ let
   settings = import ./user-settings.nix;
   stateVersion = settings.stateVersion or "24.11";
   nixpkgs =
-    settings.nixpkgs
-      or (fetchTarball "https://github.com/NixOS/nixpkgs/archive/release-${stateVersion}.tar.gz");
+    settings.nixpkgs or (fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/release-${stateVersion}.tar.gz";
+      sha256 = "1ad5im2zsbpnsha6sfxskifchxn2pr4lvkjr2f5xmbcw2v29k49f";
+    });
   pkgs = import nixpkgs { };
 in
 {
