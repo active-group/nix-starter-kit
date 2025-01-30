@@ -19,6 +19,9 @@ tar xvf <path/to>/nix-starter-kit.tar.xz
 4. ~cp user-settings.nix.template user-settings~
 5. ~vi user-settings.nix~ und ausfüllen
 6. Run ~./bootstrap.sh~
+7. Create or add an SSH key pair, register that with our services etc.
+8. At some point, clone the =howto= repository to =~/howto=. This is needed for
+   LaTeX support to work properly with AG documents.
 
 ** Usage
 
