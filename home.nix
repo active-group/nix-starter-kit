@@ -36,6 +36,7 @@ in
         gnupg
         gnutls
         home-manager
+        khard
         nixVersions.latest
         openssh
         pandoc
