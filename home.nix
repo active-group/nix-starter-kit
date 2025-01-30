@@ -17,7 +17,7 @@ in
       if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
 
     sessionVariables = rec {
-      EDITOR = "emacs";
+      EDITOR = "emacsclient";
       VISUAL = EDITOR;
       ALTERNATE_EDITOR = "";
       # NOTE: We assume that the howto directory sits at ~/howto!

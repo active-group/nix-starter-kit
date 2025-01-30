@@ -1,3 +1,7 @@
+;; Start the Emacs server: this is necessary to be able to use 'emacsclient'
+(server-start)
+
+
 ;; Add our AG "libraries" to Emacs' `load-path'
 (add-to-list 'load-path (expand-file-name "~/.config/ag-emacs"))
 
