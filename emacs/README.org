@@ -17,3 +17,9 @@ following code in a shell to create a reasonble starting point:
 mkdir -p ~/.emacs.d
 cp ~/.config/ag-emacs/example-init.el ~/.emacs.d/init.el
 #+end_src
+
+** Adding packages
+
+We use =nixpkgs= to manage the packages Emacs comes equipped with. If you need
+additional packages, use the =additionalEmacsPackages= attribute in
+=user-settings.nix=.
