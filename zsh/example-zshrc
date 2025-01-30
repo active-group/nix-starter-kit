@@ -1,0 +1,5 @@
+source ~/.config/zsh/ag.zsh
+
+enable_nix
+load_home_manager_session_variables
+start_fish_if_interactive
