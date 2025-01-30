@@ -32,7 +32,6 @@ in
         bat
         curl
         fd
-        git
         gnupg
         gnutls
         home-manager
