@@ -15,7 +15,8 @@ following code in a shell to create a reasonble starting point:
 
 #+begin_src shell
 mkdir -p ~/.emacs.d
-cp ~/.config/ag-emacs/example-init.el ~/.emacs.d/init.el
+cp -L ~/.config/ag-emacs/example-init.el ~/.emacs.d/init.el
+chmod 600 ~/.emacs.d/init.el
 #+end_src
 
 ** Adding packages
