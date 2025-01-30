@@ -32,7 +32,6 @@ in
         bat
         curl
         fd
-        git
         gnupg
         gnutls
         home-manager
@@ -68,21 +67,6 @@ in
       '';
       shellAbbrs = {
         home = "cd ~/.config/home-manager";
-      };
-    };
-    git = {
-      userName = settings.userFullName;
-      userEmail = settings.email;
-      ignores = [
-        ".DS_Store"
-        "*~"
-        "\\#*\\#"
-        ".\\#*"
-      ];
-      extraConfig = {
-        core.askPass = "";
-        init.defaultBranch = "main";
-        submodule.recurse = true;
       };
     };
   };
