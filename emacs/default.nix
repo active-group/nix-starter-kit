@@ -7,7 +7,7 @@ settings:
 }:
 {
   home = {
-    file.".emacs-ag.d" = {
+    file.".config/ag-emacs" = {
       source = ./.emacs.d;
       recursive = true;
     };
