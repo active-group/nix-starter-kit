@@ -7,14 +7,12 @@ accordingly.
 ** Provisioning a fresh system
 
 1. Install the [[https://nixos.org][Nix package manager]] on the target
-2. Create a "release" tarball locally by running
-   ~./create_bootstrapping_tarball.sh~
-3. On the target system, extract this archive to ~~/.config/home-manager~, for
+2. On the target system, clone this repository to ~~/.config/home-manager~, for
    instance:
 #+begin_src shell
-mkdir -p ~/.config/home-manager
+mkdir -p ~/.config
+git clone https://github.com/active-group/nix-starter-kit ~/.config/home-manager
 cd ~/.config/home-manager
-tar xvf <path/to>/nix-starter-kit.tar.xz
 #+end_src
 4. ~cp user-settings.nix.template user-settings~
 5. ~vi user-settings.nix~ und ausfüllen
