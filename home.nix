@@ -3,10 +3,13 @@
 let
   settings = import ./user-settings.nix;
   stateVersion = settings.stateVersion or "24.11";
+  # NOTE: when updating the setup within the same release channel, put its
+  # latest commit here
+  nixpkgsRev = "fecfeb86328381268e29e998ddd3ebc70bbd7f7c";
   nixpkgs =
     settings.nixpkgs or (fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/release-${stateVersion}.tar.gz";
-      sha256 = "1ad5im2zsbpnsha6sfxskifchxn2pr4lvkjr2f5xmbcw2v29k49f";
+      url = "https://github.com/NixOS/nixpkgs/archive/${nixpkgsRev}.tar.gz";
+      sha256 = "0m52nb9p4q468pgi1657dzcpsrxd1f15flxljaplxzjyiwbrzz5f";
     });
   pkgs = import nixpkgs { };
 in
