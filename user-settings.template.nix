@@ -4,7 +4,8 @@
   # userFullName = "Petra Eisenmann";
   # email = "petra.eisenmann@active-group.de";
   additionalPackages = pkgs: [
-    # pkgs.mercurial
+    # Kaan sein Tool would need this:
+    # pkgs.jdk
   ];
   additionalModules = settings: [
     # If you choose to opt out of the git configuration, you have to take care
