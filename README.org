@@ -1,6 +1,6 @@
 * Nix starter kit
 
-NOTE: This setup has only been tested on macOS (=x86_64-darwin=) so far. If you
+NOTE: This setup has only been tested on macOS so far. If you
 need it on any other architecture/OS, talk to Johannes and we'll adapt it
 accordingly.
 
