@@ -7,7 +7,7 @@ accordingly.
 ** Provisioning a fresh system
 
 1. Install the [[https://nixos.org][Nix package manager]] on the target
-2. On the target system, clone this repository to ~~/.config/home-manager~, for
+2. On the target system, clone this repository to =~/.config/home-manager=, for
    instance:
 #+begin_src shell
 mkdir -p ~/.config
