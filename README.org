@@ -57,6 +57,16 @@ To deactivate the notifications, execute
 ./sieve/sieve.sh deactivate
 #+end_src
 
+** Updating Nixpkgs
+
+Check:
+
+https://github.com/NixOS/nixpkgs/branches
+
+Go to the desired release branch.  =nixpkgsRev= is latest commit of this branch.
+
+If you change the release channel,  update =stateVersion=.
+
 # Local Variables:
 # fill-column: 80
 # End:

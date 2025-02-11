@@ -2,6 +2,7 @@
 
 let
   settings = import ./user-settings.nix;
+  # assumption is that this is the version of the release channel from which nixpkgsRev comes
   stateVersion = settings.stateVersion or "24.11";
   # NOTE: when updating the setup within the same release channel, put its
   # latest commit here
