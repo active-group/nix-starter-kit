@@ -15,7 +15,8 @@ let
   pkgs = import nixpkgs { };
 in
 {
-  imports = settings.additionalModules settings;
+  imports = settings.additionalModules settings ++
+            pkgs.lib.optional pkgs.stdenv.hostPlatform.isDarwin (import ./mac-app-util);
 
   home = rec {
     inherit (settings) username;
