@@ -20,6 +20,7 @@ settings:
       core.askPass = "";
       init.defaultBranch = "main";
       submodule.recurse = true;
+      pull.rebase = false;
     };
   };
 }
