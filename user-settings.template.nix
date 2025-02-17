@@ -12,6 +12,7 @@
     # to get git via `additionalPackages` or elsewhere
     (import ./git settings)
     # (import ./emacs settings)
+    # (import ./controlling)
   ];
   additionalEmacsPackages = p: [
     # p.ivy
