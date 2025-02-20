@@ -39,10 +39,15 @@ home-manager switch
 
 *** Out-of-office notifications via =sieve-connect=
 
-The file [[file:sieve/message][message]] contains a template for the message you wish to be shown. Fill
-in your details there before using the script.
+The file [[file:sieve/message.template][message.template]] contains a template for the message you wish to be
+shown. Create a copy of this file named =message=:
 
-To activate the notification, execute
+#+begin_src bash
+cp ./sieve/message.template ./sieve/message
+#+end_src
+
+Now edit it according to your preferences and personal details. To then activate
+the notification, execute
 
 #+begin_src bash
 ./sieve/sieve.sh activate
