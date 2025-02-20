@@ -15,7 +15,7 @@ git clone https://github.com/active-group/nix-starter-kit ~/.config/home-manager
 cd ~/.config/home-manager
 #+end_src
 4. ~cp user-settings.nix.template user-settings~
-5. ~vi user-settings.nix~ und ausfüllen
+5. ~vi user-settings.nix~ and customize
 6. To configure "modules" like Emacs, =zsh=, or others, check the README files in
    their respective subdirectories
 7. Run ~./bootstrap.sh~
