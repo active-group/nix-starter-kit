@@ -1,0 +1,31 @@
+require ["fileinto", "vacation", "imap4flags", "date", "variables", "relational"];
+
+# Andere Anweisungen wie Spam-Filterung, etc.
+# ...
+
+set "vacation_last_day" "2019-01-30";
+
+if currentdate :value "le" "date" "${vacation_last_day}"
+{
+  vacation
+  :from "Foo Bar <foo.bar@active-group.de>"
+  :days 7
+  :addresses ["foo.bar@active-group.de", "foba@active-group.de", "foobar@active-group.de"]
+  "Ich bin bis einschließlich ${vacation_last_day} nicht im Büro.
+Ihre Nachricht wird nicht weitergeleitet.
+In dringenden Angelegenheiten wenden Sie sich bitte an:
+- Vorname Name (person13@example.com)
+- Vorname Name (person2@example.com)
+
+--
+Foo Bar
+Active Group GmbH
+foo.bar@active-group.de
++49 7071 70896 88
+
+Hechinger Straße 12/1, 72072 Tübingen
+Registergericht: Amtsgericht Stuttgart, HRB 224404
+Geschäftsführer: Dr. Michael Sperber";
+} else {
+  keep;
+}
