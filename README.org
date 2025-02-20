@@ -62,7 +62,17 @@ To deactivate the notifications, execute
 ./sieve/sieve.sh deactivate
 #+end_src
 
-** Updating Nixpkgs
+** Keeping things up to date
+
+Run this in the shell
+
+#+begin_src bash
+cd ~/.config/home-manager
+git pull
+home-manager switch
+#+end_src
+
+** Updating Nixpkgs (for admins)
 
 Check:
 
