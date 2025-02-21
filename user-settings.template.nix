@@ -1,12 +1,22 @@
 {
-  # Mandatory fields!
-  # username = "eisenmann";
-  # userFullName = "Petra Eisenmann";
-  # email = "petra.eisenmann@active-group.de";
+  # Edit the following details:
+
+  # This needs to match the name of the actual user on your machine!
+  username = "eisenmann";
+
+  # This is the name you'd see (for instance) in git commits
+  userFullName = "Petra Eisenmann";
+
+  # This is used primarily for git commits
+  email = "petra.eisenmann@active-group.de";
+
+  # Anything in the `nixpkgs` package set that you need, you'd add here
   additionalPackages = pkgs: [
     # Kaan sein Tool would need this:
     # pkgs.jdk
   ];
+
+  # TODO
   additionalModules = settings: [
     # If you choose to opt out of the git configuration, you have to take care
     # to get git via `additionalPackages` or elsewhere
@@ -14,6 +24,8 @@
     # (import ./emacs settings)
     # (import ./controlling)
   ];
+
+  # Additional things/packages your Emacs should come pre-installed with
   additionalEmacsPackages = p: [
     # p.ivy
   ];

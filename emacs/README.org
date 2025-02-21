@@ -11,7 +11,7 @@ additionalModules = settings: [
 Then use ~home-manager switch~ to install Emacs on your system.
 
 To make use of some common configuration that we've written, execute the
-following code in a shell to create a reasonble starting point:
+following code in a shell to create a reasonable starting point:
 
 #+begin_src shell
 mkdir -p ~/.emacs.d
