@@ -23,6 +23,8 @@ in
     homeDirectory =
       if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
 
+    enableNixpkgsReleaseCheck = false;
+
     sessionVariables = rec {
       EDITOR = "emacsclient";
       VISUAL = EDITOR;
