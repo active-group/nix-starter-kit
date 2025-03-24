@@ -2,10 +2,12 @@
 
 let
   settings = import ./user-settings.nix;
-  # assumption is that this is the version of the release channel from which nixpkgsRev comes
+  # Assumption is that this is the version of the release channel from which
+  # nixpkgsRev comes. NOTE: When changing the release version, the bootstrapping
+  # script and CI definition need to be adapted accordingly!
   stateVersion = settings.stateVersion or "24.11";
-  # NOTE: when updating the setup within the same release channel, put its
-  # latest commit here
+  # NOTE: When updating the setup within the same release channel, put its
+  # latest commit here.
   nixpkgsRev = "fecfeb86328381268e29e998ddd3ebc70bbd7f7c";
   nixpkgs =
     settings.nixpkgs or (fetchTarball {
