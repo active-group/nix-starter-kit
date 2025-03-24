@@ -1,3 +1,2 @@
 * Todos
 ** =sieve= als App
-** =fish= als Default-Shell?
