@@ -1,5 +1,5 @@
-;;; Contains some common settings that have been condensed from Petra's,
-;;; Sibylle's, and Arjin's Emacs configurations
+;;; Contains some common settings that have been condensed from people's Emacs
+;;; configurations
 
 ;; Let Emacs put customizations into a separate file
 (let ((my-custom-file (locate-user-emacs-file "custom.el")))

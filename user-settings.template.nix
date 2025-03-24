@@ -2,13 +2,13 @@
   # Edit the following details:
 
   # This needs to match the name of the actual user on your machine!
-  username = "eisenmann";
+  username = "plum";
 
   # This is the name you'd see (for instance) in git commits
-  userFullName = "Petra Eisenmann";
+  userFullName = "Plim Plum";
 
   # This is used primarily for git commits
-  email = "petra.eisenmann@active-group.de";
+  email = "plim.plum@active-group.de";
 
   # Anything in the `nixpkgs` package set that you need, you'd add here
   additionalPackages = pkgs: [
