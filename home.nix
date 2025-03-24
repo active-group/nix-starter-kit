@@ -71,7 +71,7 @@ in
     direnv = {
       enable = true;
       enableFishIntegration = true;
-      nix-direnv = true;
+      nix-direnv.enable = true;
     };
     fish = {
       enable = true;
