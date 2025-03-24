@@ -1,0 +1,19 @@
+name: ci
+on: [ push, workflow_dispatch ]
+
+env:
+  NIX_PATH: "nixpkgs=channel:nixos-unstable"
+
+jobs:
+  test-build:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: create user settings
+        run: cp user-settings.template.nix user-settings.nix
+      - name: build the home configuration
+        run: nix run home-manager/release-24.11 -- build -f home.nix
