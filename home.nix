@@ -68,6 +68,11 @@ in
   };
 
   programs = {
+    direnv = {
+      enable = true;
+      enableFishIntegration = true;
+      nix-direnv = true;
+    };
     fish = {
       enable = true;
       interactiveShellInit = ''
