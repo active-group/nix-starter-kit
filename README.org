@@ -42,6 +42,14 @@ To "activate" a new configuration, always execute
 home-manager switch
 #+end_src
 
+This might fail on a major-version update.  If it does, try in order, replacing
+=<release>= by the release version (seen in =home.nix=):
+
+#+begin_src shell
+nix run home-manager/release-<release> switch
+nix run home-manager/master switch
+#+end_src
+
 *** Out-of-office notifications via =sieve-connect=
 
 The file [[file:sieve/message.template][message.template]] contains a template for the message you wish to be

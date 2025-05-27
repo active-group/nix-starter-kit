@@ -8,6 +8,7 @@ let
   stateVersion = settings.stateVersion or "24.11";
   # NOTE: When updating the setup within the same release channel, put its
   # latest commit here.
+  # NixOS 25.05 as of 2025-05-27
   nixpkgsRev = "101f54e74e5b9969bba239480e2e77c4aac0c3e0";
   nixpkgs =
     settings.nixpkgs or (fetchTarball {
