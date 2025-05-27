@@ -10,3 +10,5 @@ dock.
 (Nix installs into =~/.nix-profile/Applications=, which is a symlink
 into the Nix store, and thus not stable thru version updates.)
 
+If the trampoline crashes, try deleting =~/Applications/Home Manager Trampolines=
+and run =home-manager switch= again.
