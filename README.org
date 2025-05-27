@@ -87,6 +87,9 @@ nix run home-manager/master switch
 
 See the note on updating the Mac trampolines in [[file:mac-app-util/README.org::*mac-app-util][README for mac-app-util]].
 
+If you see errors related to "sandbox initialiaztion", you might need to turn
+off sandboxing temporarily in =/etc/nix/nix.conf=.
+
 ** Updating Nixpkgs (for admins)
 
 Check:
