@@ -16,4 +16,4 @@ jobs:
       - name: create user settings
         run: cp user-settings.template.nix user-settings.nix
       - name: build the home configuration
-        run: nix run home-manager/release-24.11 -- build -f home.nix
+        run: nix run home-manager/release-25.05 -- build -f home.nix
