@@ -16,6 +16,6 @@ nix=/nix/var/nix/profiles/default/bin/nix
 mkdir -p ~/.local/state/nix/profiles
 
 # Install the home-manager configuration
-$nix run home-manager/release-24.11 switch
+$nix run home-manager/release-25.05 switch
 
 echo "Everything should be installed now!"
