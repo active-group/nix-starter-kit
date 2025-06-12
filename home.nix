@@ -15,9 +15,9 @@ in
     settings.additionalModules settings
     # pkgs.stdenv.hostPlatform.isDarwin accesses pkgs too early
     # and causes infinite recursion
-    ++ lib.optional
-      (builtins.currentSystem == "aarch64-darwin" || builtins.currentSystem == "x86_64-darwin") 
-      (import ./mac-app-util);
+    ++ lib.optional (
+      builtins.currentSystem == "aarch64-darwin" || builtins.currentSystem == "x86_64-darwin"
+    ) (import ./mac-app-util);
 
   home = rec {
     inherit (settings) username;
