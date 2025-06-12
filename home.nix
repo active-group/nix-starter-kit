@@ -17,7 +17,7 @@ in
     # and causes infinite recursion
     ++ lib.optional (
       builtins.currentSystem == "aarch64-darwin" || builtins.currentSystem == "x86_64-darwin"
-    ) (import ./mac-app-util pkgs);
+    ) (import ./mac-app-util);
 
   home = rec {
     inherit (settings) username;
