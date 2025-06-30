@@ -2,13 +2,15 @@
   description = "A very basic flake";
 
   inputs = {
-    # FIXME: lock
     nixpkgs.url = "github:nixos/nixpkgs?ref=release-25.05";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mac-app-util.url = "github:hraban/mac-app-util";
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
