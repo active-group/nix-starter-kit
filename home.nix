@@ -1,7 +1,6 @@
-{ lib, pkgs, ... }:
+settings: { lib, pkgs, ... }:
 
 let
-  settings = import ./user-settings.nix;
   # Assumption is that this is the version of the release channel from which
   # nixpkgsRev comes. NOTE: When changing the release version, the bootstrapping
   # script and CI definition need to be adapted accordingly!
@@ -12,12 +11,7 @@ let
 in
 {
   imports =
-    settings.additionalModules settings
-    # pkgs.stdenv.hostPlatform.isDarwin accesses pkgs too early
-    # and causes infinite recursion
-    ++ lib.optional (
-      builtins.currentSystem == "aarch64-darwin" || builtins.currentSystem == "x86_64-darwin"
-    ) (import ./mac-app-util);
+    settings.additionalModules settings;
 
   home = rec {
     inherit (settings) username;
