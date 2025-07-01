@@ -56,6 +56,12 @@
           make-git = import ./git;
           controlling = import ./controlling;
         };
+
+        templates.default = {
+          path = ./templates/default;
+          description = "Bootstrap a new nix-starter-kit-powered home-manager setup";
+        };
+
         nixosModules.git =
           {
             config,
@@ -63,7 +69,8 @@
             lib,
             ...
           }:
-          let cfg = config.active-group.git;
+          let
+            cfg = config.active-group.git;
           in
           {
             options.active-group.git = {
