@@ -10,19 +10,14 @@
     let
       # FIXME
       system = "x86_64-linux";
-      identity-settings = {
+      settings = {
         username = "sperber";
         userFullName = "Mike Sperber";
         email = "sperber@deinprogramm.de";
       };
-      user-settings = identity-settings // {
-        additionalPackages = pkgs: [ ];
-        additionalModules = settings: [ ];
-      };
     in
     {
-      homeConfigurations.${user-settings.username} =
-        nix-starter-kit.lib.make-default-home-manager-config system user-settings
-          (import ./home.nix);
+      homeConfigurations.${settings.username} =
+        nix-starter-kit.lib.make-default-home-manager-config system (import ./home.nix settings);
     };
 }
