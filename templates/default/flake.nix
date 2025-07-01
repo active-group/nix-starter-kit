@@ -2,14 +2,14 @@
   description = "A simple nix-starter-kit powered user setup";
 
   inputs = {
-    nix-starter-kit.url = "path:/home/void/ag/nix-starter-kit";
+    nix-starter-kit.url = "github:active-group/nix-starter-kit";
   };
 
   outputs =
     { self, nix-starter-kit }:
     let
-      # FIXME
-      system = "x86_64-linux";
+      # FIXME: fill in values according to your system and OS settings
+      system = "aarch64-darwin";
       settings = {
         username = "sperber";
         userFullName = "Mike Sperber";
