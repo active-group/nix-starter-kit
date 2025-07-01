@@ -35,10 +35,7 @@
     };
 
     programs = {
-      home-manager = {
-        enable = true;
-        path = "$HOME/.config/home-manager";
-      };
+      home-manager.enable = true;
       direnv = {
         enable = true;
         nix-direnv.enable = true;
