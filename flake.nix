@@ -27,14 +27,21 @@
         "x86_64-linux"
         "aarch64-darwin"
       ];
+
       perSystem =
         { config, system, ... }:
-        {
-          legacyPackages = import nixpkgs {
+        let
+          pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
           };
+        in
+        {
+          legacyPackages = pkgs;
+
+          packages.update-daemon = pkgs.callPackage ./packages/update-daemon.nix { };
         };
+
       flake = {
         lib = {
           make-home-manager-config =
