@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "Modules and utilities for getting started with home-manager at Active Group";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=release-25.05";
@@ -64,15 +64,15 @@
               self.nixosModules.git
               self.nixosModules.nix-starter-kit
               self.nixosModules.mac-app-util
-              # self.nixosModules.emacs
-              # self.nixosModules.controlling
+              self.nixosModules.emacs
+              self.nixosModules.controlling
             ];
           };
-          git = import ./git;
+          git = import ./modules/git;
           nix-starter-kit = import ./modules/nix-starter-kit.nix;
-          mac-app-util = import ./modules/mac-app-util.nix;
-          # emacs = import ./emacs;
-          # controlling = import ./controlling;
+          mac-app-util = import ./modules/mac-app-util;
+          emacs = import ./modules/emacs;
+          controlling = import ./modules/controlling;
         };
       };
     };
