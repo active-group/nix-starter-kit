@@ -35,9 +35,6 @@
         xz
         zip
       ];
-
-      # FIXME(Johannes): module!
-      # file.".config/zsh/ag.zsh".source = ./zsh/ag.zsh;
     };
 
     programs = {

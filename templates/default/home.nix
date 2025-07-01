@@ -12,7 +12,7 @@ in
   home = {
     inherit username stateVersion homeDirectory;
     sessionVariables = rec {
-      # NOTE: We assume that the howto directory sits at ~/howto!
+      # NOTE: point this to your local howto checkout
       TEXINPUTS = "${homeDirectory}/howto/tex:";
       EDITOR = "emacsclient";
       VISUAL = EDITOR;
@@ -20,6 +20,7 @@ in
     };
   };
 
+  # NOTE: Change things to your liking here!
   active-group = {
     nix-starter-kit.enable = true;
     mac-app-util.enable = pkgs.stdenv.isDarwin;
@@ -33,5 +34,6 @@ in
       userName = settings.userFullName;
       userEmail = settings.email;
     };
+    zsh.enable = true;
   };
 }

@@ -66,6 +66,7 @@
               self.nixosModules.mac-app-util
               self.nixosModules.emacs
               self.nixosModules.controlling
+              self.nixosModules.zsh
             ];
           };
           git = import ./modules/git;
@@ -73,6 +74,7 @@
           mac-app-util = import ./modules/mac-app-util;
           emacs = import ./modules/emacs;
           controlling = import ./modules/controlling;
+          zsh = import ./modules/zsh;
         };
       };
     };
