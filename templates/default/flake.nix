@@ -2,7 +2,7 @@
   description = "A simple nix-starter-kit powered user setup";
 
   inputs = {
-    nix-starter-kit.url = "github:active-group/nix-starter-kit?ref=flake-o-mania";
+    nix-starter-kit.url = "path:/home/void/ag/nix-starter-kit";
   };
 
   outputs =
@@ -22,6 +22,7 @@
     in
     {
       homeConfigurations.${user-settings.username} =
-        nix-starter-kit.lib.make-default-home-manager-config system user-settings;
+        nix-starter-kit.lib.make-default-home-manager-config system user-settings
+          (import ./home.nix);
     };
 }

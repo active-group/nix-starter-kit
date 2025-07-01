@@ -63,7 +63,8 @@ in
         zip
       ]);
 
-    file.".config/zsh/ag.zsh".source = ./zsh/ag.zsh;
+    # FIXME(Johannes): module!
+    # file.".config/zsh/ag.zsh".source = ./zsh/ag.zsh;
 
     inherit stateVersion;
   };

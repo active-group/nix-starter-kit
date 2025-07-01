@@ -38,18 +38,18 @@
       flake = {
         lib = {
           make-home-manager-config =
-            pkgs: home-manager: user-settings:
+            pkgs: home-manager: user-settings: home-nix:
             home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               modules = (pkgs.lib.optional pkgs.stdenv.isDarwin mac-app-util.homeManagerModules.default) ++ [
-                (import ./home.nix user-settings)
+                (home-nix user-settings)
               ];
               extraSpecialArgs = { inherit inputs; };
             };
 
           make-default-home-manager-config =
-            system: user-settings:
-            self.lib.make-home-manager-config self.legacyPackages.${system} home-manager user-settings;
+            system: user-settings: home-nix:
+            self.lib.make-home-manager-config self.legacyPackages.${system} home-manager user-settings home-nix;
 
           # temporary
           make-emacs = import ./emacs;
