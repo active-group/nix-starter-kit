@@ -16,7 +16,6 @@
         fd
         gnupg
         gnutls
-        home-manager
         khard
         nixVersions.latest
         openssh
@@ -36,6 +35,10 @@
     };
 
     programs = {
+      home-manager = {
+        enable = true;
+        path = "$HOME/.config/home-manager";
+      };
       direnv = {
         enable = true;
         nix-direnv.enable = true;
