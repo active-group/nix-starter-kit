@@ -19,5 +19,9 @@
     {
       homeConfigurations.${settings.username} =
         nix-starter-kit.lib.make-default-home-manager-config system (import ./home.nix settings);
+
+      # This allows you to do, for instance:
+      # nix run ~/.config/home-manager#cowsay -- Hallihallo
+      inherit (nix-starter-kit) legacyPackages;
     };
 }
