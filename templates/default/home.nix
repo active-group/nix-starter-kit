@@ -18,6 +18,7 @@ in
       VISUAL = EDITOR;
       ALTERNATE_EDITOR = "";
     };
+    packages = [ ];
   };
 
   # NOTE: Change things to your liking here!
