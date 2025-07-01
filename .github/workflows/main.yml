@@ -6,15 +6,11 @@ env:
 
 jobs:
   test-build:
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, macos-latest ]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
-      - name: create user settings
-        run: cp user-settings.template.nix user-settings.nix
+      - name: create user flake from template
+        run: nix flake new --template .# /tmp/blub
       - name: build the home configuration
-        # release-25.05 is broken
-        run: nix run home-manager/f5b12be834874f7661db4ced969a621ab2d57971 -- build -f home.nix
+        run: cd /tmp/blub && nix build .#homeConfigurations.sperber.activationPackage -L -j auto
