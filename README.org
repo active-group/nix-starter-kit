@@ -1,40 +1,34 @@
 * Nix starter kit
 
-NOTE: This setup has only been tested on macOS so far. If you
-need it on any other architecture/OS, talk to Johannes and we'll adapt it
-accordingly.
-
 ** Provisioning a fresh system
 
-- Install the [[https://nixos.org][Nix package manager]]
-- On the target system, clone /this repository/ to =~/.config/home-manager=, for
-   instance:
+- Install the [[https://nixos.org][Nix package manager]] and enable Flakes
+- FIXME: bootstrapping!
+- On the target system, use the provided template to create an initial
+  home-manager configuration with batteries included:
+
 #+begin_src shell
 mkdir -p ~/.config
-git clone https://github.com/active-group/nix-starter-kit ~/.config/home-manager
-cd ~/.config/home-manager
+nix flake new --template github:active-group/nix-starter-kit ~/.config/home-manager
 #+end_src
-- ~cp user-settings.nix.template user-settings.nix~
-- Edit ~user-settings.nix~
+
 - To configure "modules" like Emacs, =zsh=, or others, check the README files in
-   their respective subdirectories
-- Run ~./bootstrap.sh~ (this just enables Flakes support for Nix by changing a
-  configuration file, and then uses ~home-manager~ to install the first version
-  of your system)
+  their respective subdirectories in this repository
 - For new people: Create or add an SSH key pair and make sure access to our
   GitLab is working. If you already have one set up, there is nothing for you to
   do.
 - If you wish to use LaTeX with batteries included, then you need to clone the
-  =howto= repository to =~/howto=. If you already have a working LaTeX setup,
-  you don't need to change anything.
+  =howto= repository to =~/howto= (or configure the path in your =home.nix= according
+  to your checkout path). If you already have a working LaTeX setup, you don't
+  need to change anything.
 
 ** Usage
 
 *** Adding software
 
 On https://search.nixos.org/packages you can search for packages you'd like to
-have available on your system. Add those packages to your =user-settings.nix= in
-the respective list.
+have available on your system. Add those packages to your =home.nix= in
+=home.packages=. Check out [[https://nix-community.github.io/home-manager/][the home-manager manual]] or ask someone if in trouble :)
 
 To "activate" a new configuration, always execute
 
@@ -42,7 +36,7 @@ To "activate" a new configuration, always execute
 home-manager switch
 #+end_src
 
-*** Out-of-office notifications via =sieve-connect=
+*** Out-of-office notifications via =sieve-connect= (FIXME)
 
 The file [[file:sieve/message.template][message.template]] contains a template for the message you wish to be
 shown. Create a copy of this file named =message=:
@@ -69,25 +63,18 @@ To deactivate the notifications, execute
 
 ** Keeping things up to date
 
-Run this in the shell
+When asked to update your configuration (usually when something has changed in
+the starter kit), do the following:
 
 #+begin_src bash
 cd ~/.config/home-manager
-git pull
+nix flake update
 home-manager switch
 #+end_src
 
-This might fail on a major-version update.  If it does, try in order, replacing
-=<release>= by the release version (seen in =home.nix=):
+See the note on updating the Mac trampolines in [[file:modules/mac-app-util/README.org::*mac-app-util][README for mac-app-util]].
 
-#+begin_src shell
-nix run home-manager/release-<release> switch
-nix run home-manager/master switch
-#+end_src
-
-See the note on updating the Mac trampolines in [[file:mac-app-util/README.org::*mac-app-util][README for mac-app-util]].
-
-If you see errors related to "sandbox initialiaztion", you might need to turn
+If you see errors related to "sandbox initialization", you might need to turn
 off sandboxing temporarily in =/etc/nix/nix.conf=.
 
 ** Updating Nixpkgs (for admins)
@@ -96,9 +83,8 @@ Check:
 
 https://github.com/NixOS/nixpkgs/branches
 
-Go to the desired release branch.  =nixpkgsRev= is latest commit of this branch.
-
-If you change the release channel,  update =stateVersion=.
+Go to the desired release branch. If you change the release channel, update the
+=stateVersion= attribute in the template.
 
 # Local Variables:
 # fill-column: 80
