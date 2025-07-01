@@ -2,9 +2,9 @@ settings:
 { lib, pkgs, ... }:
 
 let
-  # Assumption is that this is the version of the release channel from which
-  # nixpkgsRev comes.
-  stateVersion = settings.stateVersion or "24.11";
+  # Assumption is that this is the version of the release channel that is pinned
+  # in the starter kit flake
+  stateVersion = settings.stateVersion or "25.05";
   inherit (settings) username;
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
 in
