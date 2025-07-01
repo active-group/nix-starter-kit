@@ -10,8 +10,6 @@
 
   config = lib.mkIf config.active-group.nix-starter-kit.enable {
     home = {
-      enableNixpkgsReleaseCheck = false;
-
       packages = with pkgs; [
         bat
         curl
