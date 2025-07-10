@@ -10,6 +10,8 @@ writeShellScriptBin "update-daemon" ''
   nix-env -iA nixpkgs.nix
   if [ -e /bin/launchctl ]; then
     launchctl kickstart -k system/org.nixos.nix-daemon
+  else
+    systemctl restart nix-daemon.service
   fi
   EOF
 ''
