@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    active-accounting.url = "git+ssh://git@gitlab.active-group.de:1022/ag/active-accounting.git";
   };
 
   outputs =
@@ -19,10 +20,9 @@
       self,
       nixpkgs,
       home-manager,
-      flake-parts,
-      mac-app-util,
+      ...
     }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "x86_64-darwin"
