@@ -67,6 +67,7 @@ the starter kit), do the following:
 cd ~/.config/home-manager
 nix flake update
 home-manager switch
+nix run github:active-group/nix-starter-kit#update-daemon
 #+end_src
 
 See the note on updating the Mac trampolines in [[file:modules/mac-app-util/README.org::*mac-app-util][README for mac-app-util]].
