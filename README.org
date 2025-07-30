@@ -14,9 +14,6 @@ nix flake new --template github:active-group/nix-starter-kit ~/.config/home-mana
 
 - To configure "modules" like Emacs, =zsh=, or others, check the README files in
   their respective subdirectories in this repository
-- For new people: Create or add an SSH key pair and make sure access to our
-  GitLab is working. If you already have one set up, there is nothing for you to
-  do.
 - If you wish to use LaTeX with batteries included, then you need to clone the
   =howto= repository to =~/howto= (or configure the path in your =home.nix= according
   to your checkout path). If you already have a working LaTeX setup, you don't
@@ -79,12 +76,13 @@ off sandboxing temporarily in =/etc/nix/nix.conf=.
 
 ** Updating Nixpkgs (for admins)
 
-Check:
+#+begin_src bash
+cd .../nix-starter-kit
+nix flake update
+#+end_src
 
-https://github.com/NixOS/nixpkgs/branches
-
-Go to the desired release branch. If you change the release channel, update the
-=stateVersion= attribute in the template.
+If there's a new Nix version, consider updating the version number in =flake.nix=.
+Then =git push=.
 
 # Local Variables:
 # fill-column: 80
