@@ -9,11 +9,11 @@
         "npmlock2nix": "npmlock2nix"
       },
       "locked": {
-        "lastModified": 1754465374,
-        "narHash": "sha256-kGltGN939vRczX0I0g62CQG8A1vY96KzLMWyIB3kNuM=",
+        "lastModified": 1755069880,
+        "narHash": "sha256-Rrx+xmzI8aE23QwzlxXtzbhuYGu8MRGgFhA7OgzgN/4=",
         "ref": "refs/heads/main",
-        "rev": "64d3b4f25e3e51dd17246b2dc4cf10479c8c9e80",
-        "revCount": 219,
+        "rev": "4c6a248473c135d389aa7e95c14a4a8a74b49fbb",
+        "revCount": 221,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de:1022/ag/active-accounting.git"
       },
