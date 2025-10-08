@@ -66,24 +66,28 @@
           description = "Bootstrap a new nix-starter-kit-powered home-manager setup";
         };
 
-        nixosModules = {
-          default = {
-            imports = [
-              self.nixosModules.git
-              self.nixosModules.nix-starter-kit
-              self.nixosModules.mac-app-util
-              self.nixosModules.emacs
-              self.nixosModules.controlling
-              self.nixosModules.zsh
-            ];
+        nixosModules =
+          let
+            withInputs = modulePath: args: import modulePath ({ inherit inputs; } // args);
+          in
+          {
+            default = {
+              imports = [
+                self.nixosModules.git
+                self.nixosModules.nix-starter-kit
+                self.nixosModules.mac-app-util
+                self.nixosModules.emacs
+                self.nixosModules.controlling
+                self.nixosModules.zsh
+              ];
+            };
+            git = withInputs ./modules/git;
+            nix-starter-kit = withInputs ./modules/nix-starter-kit.nix;
+            mac-app-util = withInputs ./modules/mac-app-util;
+            emacs = withInputs ./modules/emacs;
+            controlling = withInputs ./modules/controlling;
+            zsh = withInputs ./modules/zsh;
           };
-          git = import ./modules/git;
-          nix-starter-kit = import ./modules/nix-starter-kit.nix;
-          mac-app-util = import ./modules/mac-app-util;
-          emacs = import ./modules/emacs;
-          controlling = import ./modules/controlling;
-          zsh = import ./modules/zsh;
-        };
       };
     };
 }
