@@ -66,24 +66,33 @@
           description = "Bootstrap a new nix-starter-kit-powered home-manager setup";
         };
 
-        nixosModules = {
-          default = {
-            imports = [
-              self.nixosModules.git
-              self.nixosModules.nix-starter-kit
-              self.nixosModules.mac-app-util
-              self.nixosModules.emacs
-              self.nixosModules.controlling
-              self.nixosModules.zsh
-            ];
+        nixosModules =
+          let
+            # NOTE(Johannes):
+            # 1.  In order for consumers of these modules to use the inputs of this flake, we need to in
+            #     effect close over our inputs.
+            # 2.  We then need to match on `pkgs`, as without this explicit match the evaluator will just
+            #     not inject them.
+            withInputs = modulePath: args@{ pkgs, ... }: import modulePath (args // { inherit inputs; });
+          in
+          {
+            default = {
+              imports = [
+                self.nixosModules.git
+                self.nixosModules.nix-starter-kit
+                self.nixosModules.mac-app-util
+                self.nixosModules.emacs
+                self.nixosModules.controlling
+                self.nixosModules.zsh
+              ];
+            };
+            git = withInputs ./modules/git;
+            nix-starter-kit = withInputs ./modules/nix-starter-kit.nix;
+            mac-app-util = withInputs ./modules/mac-app-util;
+            emacs = withInputs ./modules/emacs;
+            controlling = withInputs ./modules/controlling;
+            zsh = withInputs ./modules/zsh;
           };
-          git = import ./modules/git;
-          nix-starter-kit = import ./modules/nix-starter-kit.nix;
-          mac-app-util = import ./modules/mac-app-util;
-          emacs = import ./modules/emacs;
-          controlling = import ./modules/controlling;
-          zsh = import ./modules/zsh;
-        };
       };
     };
 }
