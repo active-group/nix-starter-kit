@@ -36,5 +36,6 @@ in
       userEmail = settings.email;
     };
     zsh.enable = true;
+    timetracking.enable = true;
   };
 }

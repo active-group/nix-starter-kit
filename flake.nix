@@ -13,6 +13,7 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     active-accounting.url = "git+ssh://git@gitlab.active-group.de:1022/ag/active-accounting.git";
+    active-timetracking.url = "git+ssh://git@gitlab.active-group.de:1022/ag/active-timetracking.git";
   };
 
   outputs =
@@ -84,6 +85,7 @@
                 self.nixosModules.emacs
                 self.nixosModules.controlling
                 self.nixosModules.zsh
+                self.nixosModules.timetracking
               ];
             };
             git = withInputs ./modules/git;
@@ -92,6 +94,7 @@
             emacs = withInputs ./modules/emacs;
             controlling = withInputs ./modules/controlling;
             zsh = withInputs ./modules/zsh;
+            timetracking = withInputs ./modules/timetracking;
           };
       };
     };
