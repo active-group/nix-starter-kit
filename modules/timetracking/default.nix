@@ -3,7 +3,6 @@
   lib,
   inputs,
   pkgs,
-  system,
   ...
 }:
 let
@@ -27,7 +26,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages =
       let
-        tt = inputs.active-timetracking.packages.${system}.default;
+        tt = inputs.active-timetracking.packages.${pkgs.system}.default;
 
         tokens-defined = cfg.timetracking-token != null && cfg.timereporting-token != null;
         wrap-script =
