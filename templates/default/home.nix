@@ -35,6 +35,10 @@ in
       userName = settings.userFullName;
       userEmail = settings.email;
     };
+    sieve = {
+      enable = false;
+      userName = settings.email;
+    };
     zsh.enable = true;
     timetracking.enable = false;
   };

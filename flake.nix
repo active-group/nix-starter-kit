@@ -79,22 +79,24 @@
           {
             default = {
               imports = [
-                self.nixosModules.git
-                self.nixosModules.nix-starter-kit
-                self.nixosModules.mac-app-util
-                self.nixosModules.emacs
                 self.nixosModules.controlling
-                self.nixosModules.zsh
+                self.nixosModules.emacs
+                self.nixosModules.git
+                self.nixosModules.mac-app-util
+                self.nixosModules.nix-starter-kit
+                self.nixosModules.sieve
                 self.nixosModules.timetracking
+                self.nixosModules.zsh
               ];
             };
-            git = withInputs ./modules/git;
-            nix-starter-kit = withInputs ./modules/nix-starter-kit.nix;
-            mac-app-util = withInputs ./modules/mac-app-util;
-            emacs = withInputs ./modules/emacs;
             controlling = withInputs ./modules/controlling;
-            zsh = withInputs ./modules/zsh;
+            emacs = withInputs ./modules/emacs;
+            git = withInputs ./modules/git;
+            mac-app-util = withInputs ./modules/mac-app-util;
+            nix-starter-kit = withInputs ./modules/nix-starter-kit.nix;
+            sieve = withInputs ./modules/sieve;
             timetracking = withInputs ./modules/timetracking;
+            zsh = withInputs ./modules/zsh;
           };
       };
     };

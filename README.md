@@ -43,31 +43,6 @@ To "activate" a new configuration, always execute
 home-manager switch
 ```
 
-### Out-of-office notifications via `sieve-connect` (FIXME)
-
-The file [[file:sieve/message.template][message.template]] contains a template for the message you wish to be
-shown. Create a copy of this file named =message=:
-
-```shell
-cp ./sieve/message.template ./sieve/message
-```
-
-Now edit it according to your preferences and personal details. To then activate
-the notification, execute
-
-```shell
-./sieve/sieve.sh activate
-```
-
-Note: you will be asked for you IMAP/Sieve username (only) on first use. This is
-your mail address, not your LDAP user name.
-
-To deactivate the notifications, execute
-
-```shell
-./sieve/sieve.sh deactivate
-```
-
 ## Keeping things up to date
 
 When asked to update your configuration (usually when something has changed in

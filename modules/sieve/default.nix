@@ -1,0 +1,63 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+let
+  cfg = config.active-group.sieve;
+in
+{
+  options.active-group.sieve = {
+    enable = lib.mkEnableOption "git";
+    userName = lib.mkOption {
+      type = lib.types.nonEmptyStr;
+    };
+    messagePath = lib.mkOption {
+      type = lib.types.nonEmptyStr;
+      default = "~/.config/home-manager/abwesenheitsnotiz";
+    };
+  };
+
+  config =
+    let
+      localSieve = cfg.messagePath;
+      remoteSieve = baseNameOf cfg.messagePath;
+      uploadAndActivate = pkgs.writeText "upload_and_activate" ''
+        upload "${localSieve}"
+        activate "${remoteSieve}"
+      '';
+      sieveCmd = "${lib.getExe pkgs.sieve-connect} -s mail.active-group.de -u ${cfg.userName}";
+      ag-sieve = pkgs.writeShellScriptBin "ag-sieve" ''
+        set -e
+
+        case "$1" in
+          "activate")
+            if [ ! -f "${localSieve}" ]; then
+              echo "Expected ${localSieve} to exist!"
+              exit 1
+            fi
+            ${sieveCmd} --exec ${uploadAndActivate}
+            echo
+            echo "------------------------------------------------------------"
+            echo "    The following out-of-office message is now *active*:"
+            echo "------------------------------------------------------------"
+            echo
+            cat "${localSieve}"
+            ;;
+          "deactivate")
+            ${sieveCmd} --deactivate
+            echo "----------------------------------------------------"
+            echo "    Out-of-office message has been *deactivated*"
+            echo "----------------------------------------------------"
+            ;;
+          *)
+            echo "Usage: $0 activate|deactivate"
+        esac
+      '';
+    in
+    lib.mkIf cfg.enable {
+      home.packages = [ ag-sieve ];
+    };
+}
