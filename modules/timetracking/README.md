@@ -1,5 +1,8 @@
 # Timetracking
 
+Add something like the following to the corresponding configuration section in
+your `home.nix` file:
+
 ```nix
   active-group.timetracking = {
     enable = true;
@@ -9,9 +12,11 @@
 ```
 
 ## Scripts
-The timetracking module provides all the scripts from =active-timetracking=.
-If both `timetracking-token` and `timereporting-token` options are set,
-the module will additionally provide the wrapped scripts
+
+The `timetracking` module provides all the scripts from `active-timetracking`.
+If both `timetracking-token` and `timereporting-token` options are set, the
+module will additionally provide the wrapped scripts
+
 - `tt-sync`
 - `tt-import-labor`
 - `tt-import-billable`
