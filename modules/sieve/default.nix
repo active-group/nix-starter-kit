@@ -52,8 +52,11 @@ in
             echo "    Out-of-office message has been *deactivated*"
             echo "----------------------------------------------------"
             ;;
+          "")
+            ${sieveCmd}
+            ;;
           *)
-            echo "Usage: $0 activate|deactivate"
+            echo "Usage: ag-sieve [activate|deactivate]"
         esac
       '';
     in

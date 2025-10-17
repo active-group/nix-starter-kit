@@ -26,3 +26,8 @@ To deactivate the notifications, execute
 ```shell
 ag-sieve deactivate
 ```
+
+## REPL
+
+In case you wish to interact with the REPL mode of `sieve-connect` directly,
+you can call `ag-sieve` without any arguments instead.
