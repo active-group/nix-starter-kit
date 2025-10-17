@@ -1,0 +1,11 @@
+# mac-app-util
+
+This makes wrapper Mac applications available in `~/Applications/Home Manager
+Trampolines`. From there, they show up in Spotlight and can be dragged into the
+dock.
+
+(Nix installs into `~/.nix-profile/Applications`, which is a symlink into the Nix
+store, and thus not stable through version updates.)
+
+If the trampoline crashes, try deleting `~/Applications/Home Manager
+Trampolines` and run `home-manager switch` again.
