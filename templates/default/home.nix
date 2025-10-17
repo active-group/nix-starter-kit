@@ -36,7 +36,7 @@ in
       userEmail = settings.email;
     };
     sieve = {
-      enable = false;
+      enable = true;
       userName = settings.email;
     };
     zsh.enable = true;
