@@ -16,13 +16,14 @@ in
     };
     messagePath = lib.mkOption {
       type = lib.types.nonEmptyStr;
-      default = "$HOME/.config/home-manager/abwesenheitsnotiz";
+      description = "Path to a note of absence (sieve script, relative to your home directory)";
+      default = ".config/home-manager/abwesenheitsnotiz";
     };
   };
 
   config =
     let
-      localSieve = cfg.messagePath;
+      localSieve = "${config.home.homeDirectory}/${cfg.messagePath}";
       remoteSieve = baseNameOf cfg.messagePath;
       uploadAndActivate = pkgs.writeText "upload_and_activate" ''
         upload "${localSieve}"
@@ -35,7 +36,7 @@ in
         case "$1" in
           "activate")
             if [ ! -f "${localSieve}" ]; then
-              echo "Expected ${localSieve} to exist!"
+              echo "Expected '${localSieve}' to exist!"
               exit 1
             fi
             ${sieveCmd} --exec ${uploadAndActivate}
