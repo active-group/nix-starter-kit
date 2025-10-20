@@ -14,12 +14,12 @@ in
     timetracking-token = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
-      description = "Path to a file containing the your timetracking API token";
+      description = "Path to a file containing your timetracking API token";
     };
     timereporting-token = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
-      description = "Path to a file containing the your timereporting API token";
+      description = "Path to a file containing your timereporting API token";
     };
   };
 
