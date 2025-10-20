@@ -50,11 +50,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1760347392,
-        "narHash": "sha256-ASM45FvaXAhASwFc0XcoD3d29JWB+GZxfbrkv+bNkiE=",
+        "lastModified": 1760706075,
+        "narHash": "sha256-p4bIq+bLL6dWDHGbgV/HJ2oxMvNCurTUrCgbTARoWwg=",
         "ref": "refs/heads/main",
-        "rev": "df372cdea3db9666028ebcddbb48321070abac1a",
-        "revCount": 187,
+        "rev": "8eae0ffdbf4802433349a9bb77f96c7ffda39a68",
+        "revCount": 194,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de:1022/ag/active-timetracking.git"
       },
@@ -516,11 +516,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1759444399,
-        "narHash": "sha256-1YfdO/mpte8D+iosmKbRJOigogmZkRQMh6r0I0WWLmY=",
+        "lastModified": 1760340410,
+        "narHash": "sha256-MOPJwzSPPeldr9BIsRY1PoQGwJz/BkWdtDk4sH8IFx8=",
         "ref": "refs/heads/main",
-        "rev": "c1f16f6e49d210644fb18dbed6a582ba48db0fb6",
-        "revCount": 60,
+        "rev": "ac67711bd2427a970b54505d26987a0d140a626d",
+        "revCount": 61,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de:1022/ag/kimai-config-sync"
       },
@@ -536,11 +536,11 @@
         "ocaml-overlay": "ocaml-overlay"
       },
       "locked": {
-        "lastModified": 1759035575,
-        "narHash": "sha256-mrUs4+DkRkOQ0vQV3gSspyTinByjSeKO15RfJQfncyY=",
+        "lastModified": 1760705865,
+        "narHash": "sha256-WKXtOjJd2UgXKePHTJgdaNJbCExFeQisWqWseKNXohs=",
         "owner": "active-group",
         "repo": "kimai_report",
-        "rev": "9944d1344b40bbced95864c7b71ce5b89bfc4cdb",
+        "rev": "a74f99b67ef11179cc9446d614d05db0399e7a06",
         "type": "github"
       },
       "original": {
@@ -851,11 +851,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1759924563,
-        "narHash": "sha256-L4KLycKilLVnXOfpBH46X3LrV8HbPfW6HhoB2AXRpNo=",
+        "lastModified": 1760705064,
+        "narHash": "sha256-yMBr0/lrVFDUdiVoe43ScEpjmjOhA6UrFcBtWyt2IY4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "98ecda14ac16695bfdffbd2da508eac46bf2d513",
+        "rev": "4e4dfda28bd13305d978758371d84b70d84ae0f9",
         "type": "github"
       },
       "original": {
