@@ -16,7 +16,7 @@ in
     };
     messagePath = lib.mkOption {
       type = lib.types.nonEmptyStr;
-      default = "~/.config/home-manager/abwesenheitsnotiz";
+      default = "$HOME/.config/home-manager/abwesenheitsnotiz";
     };
   };
 
