@@ -50,11 +50,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1761746174,
-        "narHash": "sha256-7SBLw2j25E2126aO/BmjDvTeG4sz6W2lQJjLZG5UroE=",
+        "lastModified": 1761775963,
+        "narHash": "sha256-/jwI59jpB+6wDvCZzNE33++0bA70LpbVa2EGxaS2L68=",
         "ref": "refs/heads/main",
-        "rev": "e5ff5f963f4de76e4ecea012632bd1b77279faca",
-        "revCount": 201,
+        "rev": "352f77cfcae170d696183e690205b9a2648efb15",
+        "revCount": 202,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de:1022/ag/active-timetracking.git"
       },
@@ -536,11 +536,11 @@
         "ocaml-overlay": "ocaml-overlay"
       },
       "locked": {
-        "lastModified": 1761737433,
-        "narHash": "sha256-VbfS00SxEYladTEag9a/RNEsI9SUF/FdCDVkUdhHxwY=",
+        "lastModified": 1761775864,
+        "narHash": "sha256-/bawdJ2nZhoqaj5mpuhgPj8RbYbe6hpSAhjsMdkVUF0=",
         "owner": "active-group",
         "repo": "kimai_report",
-        "rev": "b5b07a4075708cb45935bc6affe67fba793c548d",
+        "rev": "5af6744ac51bf5b70a60087bac3d2d8b606c4265",
         "type": "github"
       },
       "original": {
@@ -851,11 +851,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1761745042,
-        "narHash": "sha256-8mezXPIQb15OCGCpWt4xb3VhCPhh4xBXIfyFWS8zq6A=",
+        "lastModified": 1761775641,
+        "narHash": "sha256-dXIfnyKhUpx/5fim2OX6tmfLJxId/ULTgC/L4BV6nzc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "23312527af9e3a6ed1060a28958d80cacc2af23c",
+        "rev": "b9f7c7aa8685d20e0c8575285038cbf25537ef2f",
         "type": "github"
       },
       "original": {
@@ -882,11 +882,11 @@
     },
     "nixpkgs_8": {
       "locked": {
-        "lastModified": 1761740522,
-        "narHash": "sha256-HyMseUgEHXO+o/kDBwTkJmZhM7EA9o5t4QYQm/Hquek=",
+        "lastModified": 1761751746,
+        "narHash": "sha256-Bax2nuE86Mrg/N+uRaMNBP8C+OhD4ZydgYawsKkVtRY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "22c80c6334442244dcfcf387b8724c7878f058be",
+        "rev": "bcb8187ed6a7eec91ba11ba89db03f83c563053c",
         "type": "github"
       },
       "original": {
