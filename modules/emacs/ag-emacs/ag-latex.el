@@ -1,8 +1,5 @@
 (load "auctex.el" nil t t)
 
-;; FIXME: set to local path to howto repository
-(setenv "TEXINPUTS" (concat (expand-file-name "~/Desktop/documents/tex") ":"))
-
 (add-hook 'TeX-mode-hook 'auto-fill-mode)
 (add-hook 'tex-mode-hook 'auto-fill-mode)
 
