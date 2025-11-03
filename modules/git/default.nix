@@ -16,17 +16,15 @@ in
   config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
+      userName = cfg.userName;
+      userEmail = cfg.userEmail;
       ignores = [
         ".DS_Store"
         "*~"
         "\\#*\\#"
         ".\\#*"
       ];
-      settings = {
-        user = {
-          name = cfg.userName;
-          email = cfg.userEmail;
-        };
+      extraConfig = {
         core.askPass = "";
         init.defaultBranch = "main";
         submodule.recurse = true;
