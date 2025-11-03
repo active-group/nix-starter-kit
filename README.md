@@ -24,7 +24,7 @@ nix flake new --template github:active-group/nix-starter-kit ~/.config/home-mana
 ```shell
 mkdir -p ~/.config/nix
 echo 'experimental-features = nix-command flakes' > ~/.config/nix/nix.conf
-nix run home-manager/release-25.05 switch
+nix run github:active-group/nix-starter-kit#home-manager -- switch
 ```
 
 ## Usage

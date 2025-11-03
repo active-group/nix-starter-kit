@@ -31,7 +31,12 @@
       ];
 
       perSystem =
-        { config, system, ... }:
+        {
+          config,
+          system,
+          inputs',
+          ...
+        }:
         let
           pkgs = import nixpkgs {
             inherit system;
@@ -41,7 +46,10 @@
         {
           legacyPackages = pkgs;
 
-          packages.update-daemon = pkgs.callPackage ./packages/update-daemon.nix { };
+          packages = {
+            update-daemon = pkgs.callPackage ./packages/update-daemon.nix { };
+            home-manager = inputs'.home-manager.packages.home-manager;
+          };
         };
 
       flake = {
