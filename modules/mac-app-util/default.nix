@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 
@@ -10,8 +9,6 @@ let
   cfg = config.active-group.mac-app-util;
 in
 {
-  imports = [ inputs.mac-app-util.homeManagerModules.default ];
-
   options.active-group.mac-app-util.enable = lib.mkEnableOption "mac-app-util";
 
   config = lib.mkIf cfg.enable {
