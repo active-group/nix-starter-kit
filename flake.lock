@@ -7,11 +7,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1762706727,
-        "narHash": "sha256-4xAhiLrloT6qNCjlF4csqGAFLzsZpGTGbZJ/3b2Sa8w=",
+        "lastModified": 1762771802,
+        "narHash": "sha256-5qvHiOHPxdAFjcjMcdbpP2FC3rSX0XSxRlHG4jaDvjs=",
         "ref": "refs/heads/main",
-        "rev": "e67a15a7d488e04846321fbb9636070324c22371",
-        "revCount": 361,
+        "rev": "e79bab25eb2c83c84dccdf75519daa02431f8a6a",
+        "revCount": 366,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de/ag/active-accounting.git"
       },
