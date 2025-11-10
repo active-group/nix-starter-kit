@@ -12,8 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
-    active-accounting.url = "git+ssh://git@gitlab.active-group.de:1022/ag/active-accounting.git";
-    active-timetracking.url = "git+ssh://git@gitlab.active-group.de:1022/ag/active-timetracking.git";
+    active-accounting.url = "git+ssh://git@gitlab.active-group.de/ag/active-accounting.git";
+    active-timetracking.url = "git+ssh://git@gitlab.active-group.de/ag/active-timetracking.git";
   };
 
   outputs =
