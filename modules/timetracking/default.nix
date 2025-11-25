@@ -46,7 +46,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages =
       let
-        tt = inputs.active-timetracking.packages.${pkgs.system}.default;
+        tt = inputs.active-timetracking.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
         wrap-token-token-script =
           name: script: timetracking-token: timereporting-token:

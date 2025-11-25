@@ -11,7 +11,7 @@
 
   config = lib.mkIf config.active-group.controlling.enable {
     home.packages = [
-      inputs.active-accounting.packages.${pkgs.system}.default
+      inputs.active-accounting.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 }
