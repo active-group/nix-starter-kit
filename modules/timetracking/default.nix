@@ -95,7 +95,9 @@ in
             TOKEN1=$(cat ${token1})
             TOKEN2=$(cat ${token2})
             TOKEN3=$(cat ${token3})
+            export TT_SYNC_SOURCE_URL
             ${script} ''${TOKEN1} ''${TOKEN2} ''${TOKEN3} $@
+            unset TT_SYNC_SOURCE_URL
           '';
         wrap-url-token-script =
           name: script: url: token:
