@@ -16,32 +16,65 @@ in
       default = "https://timetracking.active-group.de/api";
       description = "URL to API enpoint of timetracking instance";
     };
-    timereporting-url =  lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = "https://timereporting.active-group.de/api";
-      description = "URL to API enpoint of timereporting instance";
-    };
     timetracking-token = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
       description = "Path to a file containing your timetracking API token";
-    };
-    timereporting-token = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Path to a file containing your timereporting API token";
     };
     timetracking-admin-token = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
       description = "Path to a file containing the admin timetracking API token";
     };
+
+    timereporting-url =  lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = "https://timereporting.active-group.de/api";
+      description = "URL to API enpoint of timereporting instance";
+    };
+    timereporting-token = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Path to a file containing your timereporting API token";
+    };
     timereporting-admin-token = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
       description = "Path to a file containing the admin timereporting API token";
     };
-  };
+
+    arbeitszeiten-url =  lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = "https://arbeitszeiten.active-group.de/api";
+      description = "URL to API enpoint of arbeitszeiten instance";
+    };
+    arbeitszeiten-token = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Path to a file containing your arbeitszeiten API token";
+    };
+    arbeitszeiten-admin-token = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Path to a file containing the admin arbeitszeiten API token";
+    };
+
+    abrechenbare-zeiten-url =  lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = "https://abrechenbare-zeiten.active-group.de/api";
+      description = "URL to API enpoint of abrechenbare-zeiten instance";
+    };
+    abrechenbare-zeiten-token = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Path to a file containing your abrechenbare-zeiten API token";
+    };
+    abrechenbare-zeiten-admin-token = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Path to a file containing the admin abrechenbare-zeiten API token";
+    };
+};
 
   config = lib.mkIf cfg.enable {
     home.packages =
@@ -49,42 +82,57 @@ in
         tt = inputs.active-timetracking.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
         wrap-token-token-script =
-          name: script: timetracking-token: timereporting-token:
+          name: script: token1: token2:
           pkgs.writeShellScriptBin name ''
-            TIME_TRACKING_TOKEN=$(cat ${timetracking-token})
-            TIME_REPORTING_TOKEN=$(cat ${timereporting-token})
-            ${script} ''${TIME_TRACKING_TOKEN} ''${TIME_REPORTING_TOKEN} $@
+            TOKEN1=$(cat ${token1})
+            TOKEN2=$(cat ${token2})
+            ${script} ''${TOKEN1} ''${TOKEN2} $@
+          '';
+        wrap-url-token-token-token-script =
+          name: script: url: token1: token2: token3:
+          pkgs.writeShellScriptBin name ''
+            TT_SYNC_SOURCE_URL=${url}
+            TOKEN1=$(cat ${token1})
+            TOKEN2=$(cat ${token2})
+            TOKEN3=$(cat ${token3})
+            ${script} ''${TOKEN1} ''${TOKEN2} ''${TOKEN3} $@
           '';
         wrap-url-token-script =
           name: script: url: token:
           pkgs.writeShellScriptBin name ''
-            TIME_REPORTING_API=${url}
-            TIME_REPORTING_TOKEN=$(cat ${token})
-            ${script} ''${TIME_REPORTING_API} ''${TIME_REPORTING_TOKEN} $@
+            API=${url}
+            TOKEN=$(cat ${token})
+            ${script} ''${API} ''${TOKEN} $@
           '';
         wrap-kimai-report =
           name: url: token:
           pkgs.writeShellScriptBin name ''
             COMMAND="$1"
             REMAINING_ARGS=("''${@:2}")
-            TIME_REPORTING_TOKEN=$(cat ${token})
-            ${tt}/bin/kimai_report "''${COMMAND}" ${url} ''${TIME_REPORTING_TOKEN} "''${REMAINING_ARGS[@]}"
+            TOKEN=$(cat ${token})
+            ${tt}/bin/kimai_report "''${COMMAND}" ${url} ''${TOKEN} "''${REMAINING_ARGS[@]}"
           '';
 
-        tt-sync = wrap-token-token-script "tt-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-token}" "${cfg.timereporting-token}";
-        tt-import-labor = wrap-url-token-script "tt-import-labor" "${tt}/bin/import-labor.sh" "${cfg.timereporting-url}" "${cfg.timereporting-token}";
-        tt-import-billable = wrap-url-token-script "tt-import-billable" "${tt}/bin/import-billable.sh"  "${cfg.timereporting-url}" "${cfg.timereporting-token}";
-        tt-timetracking = wrap-kimai-report "tt-timetracking"  "${cfg.timetracking-url}" "${cfg.timetracking-token}";
-        tt-timereporting = wrap-kimai-report "tt-timereporting"  "${cfg.timereporting-url}" "${cfg.timereporting-token}";
+        tt-sync = wrap-url-token-token-token-script "tt-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}" "${cfg.timetracking-token}" "${cfg.arbeitszeiten-token}" "${cfg.abrechenbare-zeiten-token}";
+        tt-import-arbeitszeiten = wrap-url-token-script "tt-import-arbeitszeiten" "${tt}/bin/import-arbeitszeiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
+        tt-import-abwesenheiten = wrap-url-token-script "tt-import-abwesenheiten" "${tt}/bin/import-abwesenheiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
+        tt-import-abrechenbare-zeiten = wrap-url-token-script "tt-import-abrechenbare-zeiten" "${tt}/bin/import-abrechenbare-zeiten.sh"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-token}";
+        tt-report-timetracking = wrap-kimai-report "tt-report-timetracking"  "${cfg.timetracking-url}" "${cfg.timetracking-token}";
+        tt-report-timereporting = wrap-kimai-report "tt-report-timereporting"  "${cfg.timereporting-url}" "${cfg.timereporting-token}";
+        tt-report-arbeitszeiten = wrap-kimai-report "tt-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
+        tt-report-abrechenbare-zeiten = wrap-kimai-report "tt-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-token}";
 
-        tt-admin-sync = wrap-token-token-script "tt-admin-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-admin-token}" "${cfg.timereporting-admin-token}";
-        tt-admin-delete-old-records = wrap-url-token-script "tt-admin-delete-old-records" "${tt}/bin/delete-old-records.sh" "${cfg.timereporting-url}" "${cfg.timereporting-admin-token}";
-        tt-admin-export-to-stundenzettel = wrap-url-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.timereporting-url}" "${cfg.timereporting-admin-token}";
-        tt-admin-timetracking = wrap-kimai-report "tt-admin-timetracking" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}";
-        tt-admin-timereporting = wrap-kimai-report "tt-admin-timereporting" "${cfg.timereporting-url}" "${cfg.timereporting-admin-token}";
+        tt-admin-sync = wrap-url-token-token-token-script "tt-admin-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-sync-from-timereporting = wrap-url-token-token-token-script "tt-admin-sync-from-timereporting" "${tt}/bin/sync.sh" "${cfg.timereporting-url}" "${cfg.timereporting-admin-token}" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-delete-old-records = wrap-token-token-script "tt-admin-delete-old-records" "${tt}/bin/delete-old-records.sh" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-export-to-stundenzettel = wrap-url-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-report-timetracking = wrap-kimai-report "tt-admin-report-timetracking" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}";
+        tt-admin-report-timereporting = wrap-kimai-report "tt-admin-report-timereporting" "${cfg.timereporting-url}" "${cfg.timereporting-admin-token}";
+        tt-admin-report-arbeitszeiten = wrap-kimai-report "tt-admin-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-report-abrechenbare-zeiten = wrap-kimai-report "tt-admin-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
 
       in
-        (if cfg.timetracking-token != null && cfg.timereporting-token != null then
+        (if cfg.timetracking-token != null && cfg.arbeitszeiten-token != null && cfg.abrechenbare-zeiten-token != null then
           [
             tt-sync
           ]
@@ -93,39 +141,80 @@ in
         ++
         (if cfg.timetracking-token != null then
           [
-            tt-import-labor
-            tt-import-billable
-            tt-timetracking
+            tt-report-timetracking
           ]
          else
            [ ])
         ++
         (if cfg.timereporting-token != null then
           [
-            tt-timereporting
+            tt-report-timereporting
           ]
          else
            [ ])
         ++
-        (if cfg.timetracking-admin-token != null && cfg.timereporting-admin-token != null then
+        (if cfg.arbeitszeiten-token != null then
+          [
+            tt-import-arbeitszeiten
+            tt-report-arbeitszeiten
+          ]
+         else
+           [ ])
+        ++
+        (if cfg.abrechenbare-zeiten-token != null then
+          [
+            tt-import-abrechenbare-zeiten
+            tt-report-abrechenbare-zeiten
+          ]
+         else
+           [ ])
+        ++
+        (if cfg.timetracking-admin-token != null && cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
           [
             tt-admin-sync
           ]
          else
            [ ])
         ++
+        (if cfg.timereporting-admin-token != null && cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
+          [
+            tt-admin-sync-from-timereporting
+          ]
+         else
+           [ ])
+        ++
         (if cfg.timetracking-admin-token != null then
           [
-            tt-admin-timetracking
+            tt-admin-report-timetracking
           ]
          else
            [ ])
         ++
         (if cfg.timereporting-admin-token != null then
           [
-            tt-admin-delete-old-records
+            tt-admin-report-timereporting
+          ]
+         else
+           [ ])
+        ++
+        (if cfg.arbeitszeiten-admin-token != null then
+          [
+            tt-admin-report-arbeitszeiten
+          ]
+         else
+           [ ])
+        ++
+        (if cfg.abrechenbare-zeiten-admin-token != null then
+          [
             tt-admin-export-to-stundenzettel
-            tt-admin-timereporting
+            tt-admin-report-abrechenbare-zeiten
+          ]
+         else
+           [ ])
+        ++
+        (if cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
+          [
+            tt-admin-delete-old-records
           ]
          else
            [ ])

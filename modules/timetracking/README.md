@@ -7,7 +7,8 @@ your `home.nix` file:
   active-group.timetracking = {
     enable = true;
     timetracking-token = "<path-to-timetracking-api-token>";
-    timereporting-token = "<path-to-timereporting-api-token>";
+    arbeitszeiten-token = "<path-to-arbeitszeiten-api-token>";
+    abrechenbare-zeiten-token = "<path-to-abrechenbare-zeiten-api-token>";
   };
 ```
 
@@ -15,26 +16,31 @@ your `home.nix` file:
 
 The `timetracking` module provides all the scripts from `active-timetracking`.
 
-If both `timetracking-token` and `timereporting-token` options are set, the
-module will additionally provide the wrapped scripts
+If `timetracking-token` and `arbeitszeiten-token` and
+`abrechenbare-zeiten-token` options are set, the module will additionally
+provide the wrapped scripts
 
 - `tt-sync`
-- `tt-import-labor`
-- `tt-import-billable`
-- `tt-timereporting` (`kimai_report` for `timereporting`)
-- `tt-timetracking` (`kimai_report` for `timetracking`)
+- `tt-import-arbeitszeiten`
+- `tt-import-abwesenheiten`
+- `tt-import-abrechenbare-zeiten`
+- `tt-report-timetracking`
+- `tt-report-arbeitszeiten`
+- `tt-report-abrechenbare-zeiten`
 
 which have the API tokens and API URLs already set.
 
 ## Scripts for admins
 
-If both `timetracking-admin-token` and `timereporting-admin-token` options are
-set, the module will additionally provide the wrapped scripts
+If the admin tokens `timetracking-admin-token` and `arbeitszeiten-admin-token`
+and `abrechenbare-zeiten-admin-token` options are set, the module will
+additionally provide the wrapped scripts
 
 - `tt-admin-sync`
 - `tt-admin-export-to-stundenzettel`
 - `tt-admin-delete-old-records`
-- `tt-admin-timereporting`
-- `tt-admin-timetracking`
+- `tt-report-report-timetracking`
+- `tt-report-report-arbeitszeiten`
+- `tt-report-report-abrechenbare-zeiten`
 
 which have the API tokens and API URLs already set.
