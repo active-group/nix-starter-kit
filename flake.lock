@@ -50,11 +50,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1764159305,
-        "narHash": "sha256-ORu6yPe7OPTHlg+3BOHzPNJqUr/HHJUmsJI2YG7+7ws=",
+        "lastModified": 1764240657,
+        "narHash": "sha256-ZMTgxzXpVV1gCkNU/MHNA9X8Zt03UVr33J4Ggxs9htI=",
         "ref": "refs/heads/main",
-        "rev": "8d4b73be3e5e6d52025ec1a64007f017670650ef",
-        "revCount": 220,
+        "rev": "d21edb763ceb5440a214d42e7edc2edf60ef9eea",
+        "revCount": 222,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de/ag/active-timetracking.git"
       },
@@ -536,11 +536,11 @@
         "ocaml-overlay": "ocaml-overlay"
       },
       "locked": {
-        "lastModified": 1761775864,
-        "narHash": "sha256-/bawdJ2nZhoqaj5mpuhgPj8RbYbe6hpSAhjsMdkVUF0=",
+        "lastModified": 1764240249,
+        "narHash": "sha256-SnWxXG8DYuDabDrV4uK80zjA6NSEuZ+zTNQy3meWU3I=",
         "owner": "active-group",
         "repo": "kimai_report",
-        "rev": "5af6744ac51bf5b70a60087bac3d2d8b606c4265",
+        "rev": "15bd9fad3c4c2475beb2d5dc05a1c895a0c700f2",
         "type": "github"
       },
       "original": {
@@ -851,11 +851,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1764150026,
-        "narHash": "sha256-rrEGJ/sGlFBrr+BlX/Z9+gmLWrFXb9ZD/YIrgA9UowE=",
+        "lastModified": 1764240069,
+        "narHash": "sha256-TMazsoXqcxVhzKff6Io8q6j/qrK/o6nZyiMU1kr2c6I=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bc5fe1a52f573d1bc0e9c06994eb37a4bd9a65f7",
+        "rev": "13fafb7ebb1cf6e81efbfcec83ee04f4089049ce",
         "type": "github"
       },
       "original": {
