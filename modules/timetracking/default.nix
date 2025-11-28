@@ -114,6 +114,38 @@ in
             TOKEN=$(cat ${token})
             ${tt}/bin/kimai_report "''${COMMAND}" ${url} ''${TOKEN} "''${REMAINING_ARGS[@]}"
           '';
+        wrap-kimai-config-sync =
+          name:
+          pkgs.writeShellScriptBin name ''
+            TIMETRACKING_APIKEY=$(cat ${cfg.timetracking-admin-token})
+            ARBEITSZEITEN_APIKEY=$(cat ${cfg.arbeitszeiten-admin-token})
+            ABRECHENBARE_ZEITEN_APIKEY=$(cat ${cfg.abrechenbare-zeiten-admin-token})
+
+            CMD=''${1-diff}
+            ARBEITSZEITEN_EDN=''${2-arbeitszeiten.edn}
+            ABRECHENBARE_ZEITEN_EDN=''${3-abrechenbare-zeiten.edn}
+
+            USAGE="Usage: $(basename $0) <cmd:diff|sync> </path/to/arbeitszeiten.edn> </path/to/abrechenbare-zeiten.edn>"
+            ERROR=""
+
+            if [ ! -f ''${ARBEITSZEITEN_EDN} ]; then
+               ERROR="''${ERROR}Error: ''${ARBEITSZEITEN_EDN} not found.\n"
+            fi
+
+            if [ ! -f ''${ABRECHENBARE_ZEITEN_EDN} ]; then
+               ERROR="''${ERROR}Error: ''${ABRECHENBARE_ZEITEN_EDN} not found.\n"
+            fi
+
+            if [ ! -z "''${ERROR}" ]; then
+               echo -e "''${ERROR}"
+               echo "''${USAGE}"
+               exit -1
+            fi
+
+            ${tt}/bin/kimai-config-sync "''${CMD}" -u ${cfg.timetracking-url} -k "''${TIMETRACKING_APIKEY}" -c "''${ABRECHENBARE_ZEITEN_EDN}" -c "''${ARBEITSZEITEN_EDN}"
+            ${tt}/bin/kimai-config-sync "''${CMD}" -u ${cfg.abrechenbare-zeiten-url} -k "''${ABRECHENBARE_ZEITEN_APIKEY}" -c "''${ABRECHENBARE_ZEITEN_EDN}"
+            ${tt}/bin/kimai-config-sync "''${CMD}" -u ${cfg.arbeitszeiten-url} -k "''${ARBEITSZEITEN_APIKEY}" -c "''${ARBEITSZEITEN_EDN}"
+          '';
 
         tt-sync = wrap-url-token-token-token-script "tt-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}" "${cfg.timetracking-token}" "${cfg.arbeitszeiten-token}" "${cfg.abrechenbare-zeiten-token}";
         tt-import-arbeitszeiten = wrap-url-token-script "tt-import-arbeitszeiten" "${tt}/bin/import-arbeitszeiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
@@ -132,6 +164,8 @@ in
         tt-admin-report-timereporting = wrap-kimai-report "tt-admin-report-timereporting" "${cfg.timereporting-url}" "${cfg.timereporting-admin-token}";
         tt-admin-report-arbeitszeiten = wrap-kimai-report "tt-admin-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
         tt-admin-report-abrechenbare-zeiten = wrap-kimai-report "tt-admin-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
+
+        tt-admin-kimai-config-sync = wrap-kimai-config-sync "tt-admin-kimai-config-sync";
 
       in
         (if cfg.timetracking-token != null && cfg.arbeitszeiten-token != null && cfg.abrechenbare-zeiten-token != null then
@@ -181,6 +215,7 @@ in
         (if cfg.timereporting-admin-token != null && cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
           [
             tt-admin-sync-from-timereporting
+            tt-admin-kimai-config-sync
           ]
          else
            [ ])
