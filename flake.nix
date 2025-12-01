@@ -60,7 +60,7 @@
               inherit pkgs;
               modules = [
                 inputs.mac-app-util.homeManagerModules.default
-                self.nixosModules.default
+                self.homeModules.default
                 home-nix
               ];
               extraSpecialArgs = { inherit inputs; };
@@ -76,7 +76,7 @@
           description = "Bootstrap a new nix-starter-kit-powered home-manager setup";
         };
 
-        nixosModules =
+        homeModules =
           let
             # NOTE(Johannes):
             # 1.  In order for consumers of these modules to use the inputs of this flake, we need to in
@@ -88,14 +88,14 @@
           {
             default = {
               imports = [
-                self.nixosModules.controlling
-                self.nixosModules.emacs
-                self.nixosModules.git
-                self.nixosModules.mac-app-util
-                self.nixosModules.nix-starter-kit
-                self.nixosModules.sieve
-                self.nixosModules.timetracking
-                self.nixosModules.zsh
+                self.homeModules.controlling
+                self.homeModules.emacs
+                self.homeModules.git
+                self.homeModules.mac-app-util
+                self.homeModules.nix-starter-kit
+                self.homeModules.sieve
+                self.homeModules.timetracking
+                self.homeModules.zsh
               ];
             };
             controlling = withInputs ./modules/controlling;
