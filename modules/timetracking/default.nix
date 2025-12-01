@@ -192,6 +192,7 @@ in
         (if cfg.arbeitszeiten-token != null then
           [
             tt-import-arbeitszeiten
+            tt-import-abwesenheiten
             tt-report-arbeitszeiten
           ]
          else
