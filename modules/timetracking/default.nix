@@ -27,22 +27,6 @@ in
       description = "Path to a file containing the admin timetracking API token";
     };
 
-    timereporting-url =  lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = "https://timereporting.active-group.de/api";
-      description = "URL to API enpoint of timereporting instance";
-    };
-    timereporting-token = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Path to a file containing your timereporting API token";
-    };
-    timereporting-admin-token = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Path to a file containing the admin timereporting API token";
-    };
-
     arbeitszeiten-url =  lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = "https://arbeitszeiten.active-group.de/api";
@@ -152,16 +136,13 @@ in
         tt-import-abwesenheiten = wrap-url-token-script "tt-import-abwesenheiten" "${tt}/bin/import-abwesenheiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
         tt-import-abrechenbare-zeiten = wrap-url-token-script "tt-import-abrechenbare-zeiten" "${tt}/bin/import-abrechenbare-zeiten.sh"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-token}";
         tt-report-timetracking = wrap-kimai-report "tt-report-timetracking"  "${cfg.timetracking-url}" "${cfg.timetracking-token}";
-        tt-report-timereporting = wrap-kimai-report "tt-report-timereporting"  "${cfg.timereporting-url}" "${cfg.timereporting-token}";
         tt-report-arbeitszeiten = wrap-kimai-report "tt-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
         tt-report-abrechenbare-zeiten = wrap-kimai-report "tt-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-token}";
 
         tt-admin-sync = wrap-url-token-token-token-script "tt-admin-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
-        tt-admin-sync-from-timereporting = wrap-url-token-token-token-script "tt-admin-sync-from-timereporting" "${tt}/bin/sync.sh" "${cfg.timereporting-url}" "${cfg.timereporting-admin-token}" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-delete-old-records = wrap-token-token-script "tt-admin-delete-old-records" "${tt}/bin/delete-old-records.sh" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-export-to-stundenzettel = wrap-url-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-report-timetracking = wrap-kimai-report "tt-admin-report-timetracking" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}";
-        tt-admin-report-timereporting = wrap-kimai-report "tt-admin-report-timereporting" "${cfg.timereporting-url}" "${cfg.timereporting-admin-token}";
         tt-admin-report-arbeitszeiten = wrap-kimai-report "tt-admin-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
         tt-admin-report-abrechenbare-zeiten = wrap-kimai-report "tt-admin-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
 
@@ -178,13 +159,6 @@ in
         (if cfg.timetracking-token != null then
           [
             tt-report-timetracking
-          ]
-         else
-           [ ])
-        ++
-        (if cfg.timereporting-token != null then
-          [
-            tt-report-timereporting
           ]
          else
            [ ])
@@ -213,9 +187,8 @@ in
          else
            [ ])
         ++
-        (if cfg.timereporting-admin-token != null && cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
+        (if cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
           [
-            tt-admin-sync-from-timereporting
             tt-admin-kimai-config-sync
           ]
          else
@@ -224,13 +197,6 @@ in
         (if cfg.timetracking-admin-token != null then
           [
             tt-admin-report-timetracking
-          ]
-         else
-           [ ])
-        ++
-        (if cfg.timereporting-admin-token != null then
-          [
-            tt-admin-report-timereporting
           ]
          else
            [ ])
