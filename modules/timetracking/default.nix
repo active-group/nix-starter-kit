@@ -147,7 +147,7 @@ in
 
         tt-admin-sync = wrap-url-token-token-token-script "tt-admin-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-delete-old-records = wrap-token-token-script "tt-admin-delete-old-records" "${tt}/bin/delete-old-records.sh" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
-        tt-admin-export-to-stundenzettel = wrap-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-export-to-stundenzettel = wrap-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-show-missing-arbeitszeiten = wrap-token-script "tt-admin-show-missing-arbeitszeiten" "${tt}/bin/show-missing-arbeitszeiten.sh" "${cfg.arbeitszeiten-admin-token}";
         tt-admin-report-timetracking = wrap-kimai-report "tt-admin-report-timetracking" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}";
         tt-admin-report-arbeitszeiten = wrap-kimai-report "tt-admin-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
