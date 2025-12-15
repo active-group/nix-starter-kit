@@ -83,6 +83,12 @@ in
             ${script} ''${TOKEN1} ''${TOKEN2} ''${TOKEN3} $@
             unset TT_SYNC_SOURCE_URL
           '';
+        wrap-token-script =
+          name: script: token:
+          pkgs.writeShellScriptBin name ''
+            TOKEN=$(cat ${token})
+            ${script} ''${TOKEN} $@
+          '';
         wrap-url-token-script =
           name: script: url: token:
           pkgs.writeShellScriptBin name ''
@@ -141,7 +147,8 @@ in
 
         tt-admin-sync = wrap-url-token-token-token-script "tt-admin-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-delete-old-records = wrap-token-token-script "tt-admin-delete-old-records" "${tt}/bin/delete-old-records.sh" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
-        tt-admin-export-to-stundenzettel = wrap-url-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-export-to-stundenzettel = wrap-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-show-missing-arbeitszeiten = wrap-token-script "tt-admin-show-missing-arbeitszeiten" "${tt}/bin/show-missing-arbeitszeiten.sh" "${cfg.arbeitszeiten-admin-token}";
         tt-admin-report-timetracking = wrap-kimai-report "tt-admin-report-timetracking" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}";
         tt-admin-report-arbeitszeiten = wrap-kimai-report "tt-admin-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
         tt-admin-report-abrechenbare-zeiten = wrap-kimai-report "tt-admin-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
@@ -204,6 +211,7 @@ in
         (if cfg.arbeitszeiten-admin-token != null then
           [
             tt-admin-report-arbeitszeiten
+            tt-admin-show-missing-arbeitszeiten
           ]
          else
            [ ])
