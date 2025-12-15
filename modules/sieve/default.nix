@@ -10,7 +10,7 @@ let
 in
 {
   options.active-group.sieve = {
-    enable = lib.mkEnableOption "git";
+    enable = lib.mkEnableOption "sieve";
     userName = lib.mkOption {
       type = lib.types.nonEmptyStr;
     };
