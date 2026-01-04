@@ -92,7 +92,7 @@
                 self.homeModules.emacs
                 self.homeModules.git
                 self.homeModules.khard
-                self.homeModules.mac-app-util
+                # self.homeModules.mac-app-util
                 self.homeModules.nix-starter-kit
                 self.homeModules.sieve
                 self.homeModules.timetracking
