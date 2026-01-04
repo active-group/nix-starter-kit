@@ -103,7 +103,7 @@
             emacs = withInputs ./modules/emacs;
             git = withInputs ./modules/git;
             khard = withInputs ./modules/khard;
-            mac-app-util = withInputs ./modules/mac-app-util;
+            # mac-app-util = withInputs ./modules/mac-app-util;
             nix-starter-kit = withInputs ./modules/nix-starter-kit.nix;
             sieve = withInputs ./modules/sieve;
             timetracking = withInputs ./modules/timetracking;
