@@ -7,10 +7,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # mac-app-util = {
-    # url = "github:hraban/mac-app-util";
-    # inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     active-accounting.url = "git+ssh://git@gitlab.active-group.de/ag/active-accounting.git";
     active-timetracking.url = "git+ssh://git@gitlab.active-group.de/ag/active-timetracking.git";
@@ -92,7 +92,7 @@
                 self.homeModules.emacs
                 self.homeModules.git
                 self.homeModules.khard
-                # self.homeModules.mac-app-util
+                self.homeModules.mac-app-util
                 self.homeModules.nix-starter-kit
                 self.homeModules.sieve
                 self.homeModules.timetracking
@@ -103,7 +103,7 @@
             emacs = withInputs ./modules/emacs;
             git = withInputs ./modules/git;
             khard = withInputs ./modules/khard;
-            # mac-app-util = withInputs ./modules/mac-app-util;
+            mac-app-util = withInputs ./modules/mac-app-util;
             nix-starter-kit = withInputs ./modules/nix-starter-kit.nix;
             sieve = withInputs ./modules/sieve;
             timetracking = withInputs ./modules/timetracking;
