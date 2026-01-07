@@ -149,6 +149,9 @@ in
         tt-admin-delete-old-records = wrap-token-token-script "tt-admin-delete-old-records" "${tt}/bin/delete-old-records.sh" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-export-to-stundenzettel = wrap-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-show-missing-arbeitszeiten = wrap-token-script "tt-admin-show-missing-arbeitszeiten" "${tt}/bin/show-missing-arbeitszeiten.sh" "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-import-arbeitszeiten = wrap-url-token-script "tt-admin-import-arbeitszeiten" "${tt}/bin/import-arbeitszeiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-import-abwesenheiten = wrap-url-token-script "tt-admin-import-abwesenheiten" "${tt}/bin/import-abwesenheiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-import-abrechenbare-zeiten = wrap-url-token-script "tt-admin-import-abrechenbare-zeiten" "${tt}/bin/import-abrechenbare-zeiten.sh"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
         tt-admin-report-timetracking = wrap-kimai-report "tt-admin-report-timetracking" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}";
         tt-admin-report-arbeitszeiten = wrap-kimai-report "tt-admin-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
         tt-admin-report-abrechenbare-zeiten = wrap-kimai-report "tt-admin-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
@@ -211,6 +214,8 @@ in
         (if cfg.arbeitszeiten-admin-token != null then
           [
             tt-admin-report-arbeitszeiten
+            tt-admin-import-arbeitszeiten
+            tt-admin-import-abwesenheiten
             tt-admin-show-missing-arbeitszeiten
           ]
          else
@@ -220,6 +225,7 @@ in
           [
             tt-admin-export-to-stundenzettel
             tt-admin-report-abrechenbare-zeiten
+            tt-admin-import-abrechenbare-zeiten
           ]
          else
            [ ])
