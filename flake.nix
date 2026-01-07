@@ -60,7 +60,7 @@
               inherit pkgs;
               modules = [
                 # NOTE(Johannes): If we import this module later on (say in another module's
-                # `imports`), the `pkgs` the won't have received any overrides we specified.
+                # `imports`), the `pkgs` there won't have received any overrides we specified.
                 # Rather, they'll be as defined in `mac-app-util`.
                 inputs.mac-app-util.homeManagerModules.default
                 self.homeModules.default
