@@ -59,7 +59,7 @@
             home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               modules = [
-                # inputs.mac-app-util.homeManagerModules.default
+                inputs.mac-app-util.homeManagerModules.default
                 self.homeModules.default
                 home-nix
               ];
