@@ -12,6 +12,7 @@
     home = {
       packages = with pkgs; [
         bat
+        coreutils
         curl
         fd
         gnupg
