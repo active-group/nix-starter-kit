@@ -11,7 +11,7 @@ in
 {
   options.active-group.timetracking = {
     enable = lib.mkEnableOption "timetracking";
-    timetracking-url =  lib.mkOption {
+    timetracking-url = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = "https://timetracking.active-group.de/api";
       description = "URL to API enpoint of timetracking instance";
@@ -27,7 +27,7 @@ in
       description = "Path to a file containing the admin timetracking API token";
     };
 
-    arbeitszeiten-url =  lib.mkOption {
+    arbeitszeiten-url = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = "https://arbeitszeiten.active-group.de/api";
       description = "URL to API enpoint of arbeitszeiten instance";
@@ -43,7 +43,7 @@ in
       description = "Path to a file containing the admin arbeitszeiten API token";
     };
 
-    abrechenbare-zeiten-url =  lib.mkOption {
+    abrechenbare-zeiten-url = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = "https://abrechenbare-zeiten.active-group.de/api";
       description = "URL to API enpoint of abrechenbare-zeiten instance";
@@ -58,7 +58,7 @@ in
       default = null;
       description = "Path to a file containing the admin abrechenbare-zeiten API token";
     };
-};
+  };
 
   config = lib.mkIf cfg.enable {
     home.packages =
@@ -105,11 +105,11 @@ in
             ${tt}/bin/kimai_report "''${COMMAND}" ${url} ''${TOKEN} "''${REMAINING_ARGS[@]}"
           '';
         wrap-kimai-config-sync =
-          name:
+          name: timetracking-admin-token: arbeitszeiten-admin-token: abrechenbare-zeiten-admin-token:
           pkgs.writeShellScriptBin name ''
-            TIMETRACKING_APIKEY=$(cat ${cfg.timetracking-admin-token})
-            ARBEITSZEITEN_APIKEY=$(cat ${cfg.arbeitszeiten-admin-token})
-            ABRECHENBARE_ZEITEN_APIKEY=$(cat ${cfg.abrechenbare-zeiten-admin-token})
+            TIMETRACKING_APIKEY=$(cat ${timetracking-admin-token})
+            ARBEITSZEITEN_APIKEY=$(cat ${arbeitszeiten-admin-token})
+            ABRECHENBARE_ZEITEN_APIKEY=$(cat ${abrechenbare-zeiten-admin-token})
 
             CMD=''${1-diff}
             ARBEITSZEITEN_EDN=''${2-arbeitszeiten.edn}
@@ -136,106 +136,168 @@ in
             ${tt}/bin/kimai-config-sync "''${CMD}" -u ${cfg.abrechenbare-zeiten-url} -k "''${ABRECHENBARE_ZEITEN_APIKEY}" -c "''${ABRECHENBARE_ZEITEN_EDN}"
             ${tt}/bin/kimai-config-sync "''${CMD}" -u ${cfg.arbeitszeiten-url} -k "''${ARBEITSZEITEN_APIKEY}" -c "''${ARBEITSZEITEN_EDN}"
           '';
+        tt-sync = wrap-url-token-token-token-script "tt-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url
+        }" "${cfg.timetracking-token}" "${cfg.arbeitszeiten-token}" "${cfg.abrechenbare-zeiten-token}";
+        tt-import-arbeitszeiten =
+          wrap-url-token-script "tt-import-arbeitszeiten" "${tt}/bin/import-arbeitszeiten.sh"
+            "${cfg.arbeitszeiten-url}"
+            "${cfg.arbeitszeiten-token}";
+        tt-import-abwesenheiten =
+          wrap-url-token-script "tt-import-abwesenheiten" "${tt}/bin/import-abwesenheiten.sh"
+            "${cfg.arbeitszeiten-url}"
+            "${cfg.arbeitszeiten-token}";
+        tt-import-abrechenbare-zeiten =
+          wrap-url-token-script "tt-import-abrechenbare-zeiten" "${tt}/bin/import-abrechenbare-zeiten.sh"
+            "${cfg.abrechenbare-zeiten-url}"
+            "${cfg.abrechenbare-zeiten-token}";
+        tt-report-timetracking = wrap-kimai-report "tt-report-timetracking" "${cfg.timetracking-url
+        }" "${cfg.timetracking-token}";
+        tt-report-arbeitszeiten = wrap-kimai-report "tt-report-arbeitszeiten" "${cfg.arbeitszeiten-url
+        }" "${cfg.arbeitszeiten-token}";
+        tt-report-abrechenbare-zeiten =
+          wrap-kimai-report "tt-report-abrechenbare-zeiten" "${cfg.abrechenbare-zeiten-url}"
+            "${cfg.abrechenbare-zeiten-token}";
 
-        tt-sync = wrap-url-token-token-token-script "tt-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}" "${cfg.timetracking-token}" "${cfg.arbeitszeiten-token}" "${cfg.abrechenbare-zeiten-token}";
-        tt-import-arbeitszeiten = wrap-url-token-script "tt-import-arbeitszeiten" "${tt}/bin/import-arbeitszeiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
-        tt-import-abwesenheiten = wrap-url-token-script "tt-import-abwesenheiten" "${tt}/bin/import-abwesenheiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
-        tt-import-abrechenbare-zeiten = wrap-url-token-script "tt-import-abrechenbare-zeiten" "${tt}/bin/import-abrechenbare-zeiten.sh"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-token}";
-        tt-report-timetracking = wrap-kimai-report "tt-report-timetracking"  "${cfg.timetracking-url}" "${cfg.timetracking-token}";
-        tt-report-arbeitszeiten = wrap-kimai-report "tt-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-token}";
-        tt-report-abrechenbare-zeiten = wrap-kimai-report "tt-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-token}";
+        tt-admin-sync =
+          wrap-url-token-token-token-script "tt-admin-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}"
+            "${cfg.timetracking-admin-token}"
+            "${cfg.arbeitszeiten-admin-token}"
+            "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-delete-old-records =
+          wrap-token-token-script "tt-admin-delete-old-records" "${tt}/bin/delete-old-records.sh"
+            "${cfg.arbeitszeiten-admin-token}"
+            "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-export-to-stundenzettel =
+          wrap-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh"
+            "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-show-missing-arbeitszeiten =
+          wrap-token-script "tt-admin-show-missing-arbeitszeiten" "${tt}/bin/show-missing-arbeitszeiten.sh"
+            "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-import-arbeitszeiten =
+          wrap-url-token-script "tt-admin-import-arbeitszeiten" "${tt}/bin/import-arbeitszeiten.sh"
+            "${cfg.arbeitszeiten-url}"
+            "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-import-abwesenheiten =
+          wrap-url-token-script "tt-admin-import-abwesenheiten" "${tt}/bin/import-abwesenheiten.sh"
+            "${cfg.arbeitszeiten-url}"
+            "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-import-abrechenbare-zeiten =
+          wrap-url-token-script "tt-admin-import-abrechenbare-zeiten"
+            "${tt}/bin/import-abrechenbare-zeiten.sh"
+            "${cfg.abrechenbare-zeiten-url}"
+            "${cfg.abrechenbare-zeiten-admin-token}";
+        tt-admin-report-timetracking =
+          wrap-kimai-report "tt-admin-report-timetracking" "${cfg.timetracking-url}"
+            "${cfg.timetracking-admin-token}";
+        tt-admin-report-arbeitszeiten =
+          wrap-kimai-report "tt-admin-report-arbeitszeiten" "${cfg.arbeitszeiten-url}"
+            "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-report-abrechenbare-zeiten =
+          wrap-kimai-report "tt-admin-report-abrechenbare-zeiten" "${cfg.abrechenbare-zeiten-url}"
+            "${cfg.abrechenbare-zeiten-admin-token}";
 
-        tt-admin-sync = wrap-url-token-token-token-script "tt-admin-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
-        tt-admin-delete-old-records = wrap-token-token-script "tt-admin-delete-old-records" "${tt}/bin/delete-old-records.sh" "${cfg.arbeitszeiten-admin-token}" "${cfg.abrechenbare-zeiten-admin-token}";
-        tt-admin-export-to-stundenzettel = wrap-token-script "tt-admin-export-to-stundenzettel" "${tt}/bin/export-to-stundenzettel.sh" "${cfg.abrechenbare-zeiten-admin-token}";
-        tt-admin-show-missing-arbeitszeiten = wrap-token-script "tt-admin-show-missing-arbeitszeiten" "${tt}/bin/show-missing-arbeitszeiten.sh" "${cfg.arbeitszeiten-admin-token}";
-        tt-admin-import-arbeitszeiten = wrap-url-token-script "tt-admin-import-arbeitszeiten" "${tt}/bin/import-arbeitszeiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
-        tt-admin-import-abwesenheiten = wrap-url-token-script "tt-admin-import-abwesenheiten" "${tt}/bin/import-abwesenheiten.sh" "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
-        tt-admin-import-abrechenbare-zeiten = wrap-url-token-script "tt-admin-import-abrechenbare-zeiten" "${tt}/bin/import-abrechenbare-zeiten.sh"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
-        tt-admin-report-timetracking = wrap-kimai-report "tt-admin-report-timetracking" "${cfg.timetracking-url}" "${cfg.timetracking-admin-token}";
-        tt-admin-report-arbeitszeiten = wrap-kimai-report "tt-admin-report-arbeitszeiten"  "${cfg.arbeitszeiten-url}" "${cfg.arbeitszeiten-admin-token}";
-        tt-admin-report-abrechenbare-zeiten = wrap-kimai-report "tt-admin-report-abrechenbare-zeiten"  "${cfg.abrechenbare-zeiten-url}" "${cfg.abrechenbare-zeiten-admin-token}";
-
-        tt-admin-kimai-config-sync = wrap-kimai-config-sync "tt-admin-kimai-config-sync";
+        tt-admin-kimai-config-sync =
+          wrap-kimai-config-sync "tt-admin-kimai-config-sync" "${cfg.timetracking-admin-token}"
+            "${cfg.arbeitszeiten-admin-token}"
+            "${cfg.abrechenbare-zeiten-admin-token}";
 
       in
-        (if cfg.timetracking-token != null && cfg.arbeitszeiten-token != null && cfg.abrechenbare-zeiten-token != null then
+      (
+        if
+          cfg.timetracking-token != null
+          && cfg.arbeitszeiten-token != null
+          && cfg.abrechenbare-zeiten-token != null
+        then
           [
             tt-sync
           ]
-         else
-           [ ])
-        ++
-        (if cfg.timetracking-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if cfg.timetracking-token != null then
           [
             tt-report-timetracking
           ]
-         else
-           [ ])
-        ++
-        (if cfg.arbeitszeiten-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if cfg.arbeitszeiten-token != null then
           [
             tt-import-arbeitszeiten
             tt-import-abwesenheiten
             tt-report-arbeitszeiten
           ]
-         else
-           [ ])
-        ++
-        (if cfg.abrechenbare-zeiten-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if cfg.abrechenbare-zeiten-token != null then
           [
             tt-import-abrechenbare-zeiten
             tt-report-abrechenbare-zeiten
           ]
-         else
-           [ ])
-        ++
-        (if cfg.timetracking-admin-token != null && cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if
+          cfg.timetracking-admin-token != null
+          && cfg.arbeitszeiten-admin-token != null
+          && cfg.abrechenbare-zeiten-admin-token != null
+        then
           [
             tt-admin-sync
           ]
-         else
-           [ ])
-        ++
-        (if cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
           [
             tt-admin-kimai-config-sync
           ]
-         else
-           [ ])
-        ++
-        (if cfg.timetracking-admin-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if cfg.timetracking-admin-token != null then
           [
             tt-admin-report-timetracking
           ]
-         else
-           [ ])
-        ++
-        (if cfg.arbeitszeiten-admin-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if cfg.arbeitszeiten-admin-token != null then
           [
             tt-admin-report-arbeitszeiten
             tt-admin-import-arbeitszeiten
             tt-admin-import-abwesenheiten
             tt-admin-show-missing-arbeitszeiten
           ]
-         else
-           [ ])
-        ++
-        (if cfg.abrechenbare-zeiten-admin-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if cfg.abrechenbare-zeiten-admin-token != null then
           [
             tt-admin-export-to-stundenzettel
             tt-admin-report-abrechenbare-zeiten
             tt-admin-import-abrechenbare-zeiten
           ]
-         else
-           [ ])
-        ++
-        (if cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
+        else
+          [ ]
+      )
+      ++ (
+        if cfg.arbeitszeiten-admin-token != null && cfg.abrechenbare-zeiten-admin-token != null then
           [
             tt-admin-delete-old-records
           ]
-         else
-           [ ])
-        ++ [ tt ];
+        else
+          [ ]
+      )
+      ++ [ tt ];
   };
 }
