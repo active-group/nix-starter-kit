@@ -173,6 +173,9 @@ in
         tt-admin-show-missing-arbeitszeiten =
           wrap-token-script "tt-admin-show-missing-arbeitszeiten" "${tt}/bin/show-missing-arbeitszeiten.sh"
             "${cfg.arbeitszeiten-admin-token}";
+        tt-admin-show-arbeitszeiten-compliance =
+          wrap-token-script "tt-admin-show-arbeitszeiten-compliance" "${tt}/bin/show-arbeitszeiten-compliance.sh"
+            "${cfg.arbeitszeiten-admin-token}";
         tt-admin-import-arbeitszeiten =
           wrap-url-token-script "tt-admin-import-arbeitszeiten" "${tt}/bin/import-arbeitszeiten.sh"
             "${cfg.arbeitszeiten-url}"
@@ -280,6 +283,7 @@ in
             tt-admin-import-arbeitszeiten
             tt-admin-import-abwesenheiten
             tt-admin-show-missing-arbeitszeiten
+            tt-admin-show-arbeitszeiten-compliance
           ]
         else
           [ ]
