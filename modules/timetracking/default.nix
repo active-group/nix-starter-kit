@@ -252,17 +252,6 @@ in
         then
           [
             tt-admin-sync
-          ]
-        else
-          [ ]
-      )
-      ++ (
-        if
-          cfg.timetracking-admin-token != null
-          && cfg.arbeitszeiten-admin-token != null
-          && cfg.abrechenbare-zeiten-admin-token != null
-        then
-          [
             tt-admin-kimai-config-sync
           ]
         else
