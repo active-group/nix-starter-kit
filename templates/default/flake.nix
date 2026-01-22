@@ -9,6 +9,7 @@
     { self, nix-starter-kit }:
     let
       # FIXME: fill in values according to your system and OS settings
+      # other possible values: x86_64-linux, x86_64-darwin
       system = "aarch64-darwin";
       settings = {
         username = "sperber";
