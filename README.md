@@ -7,7 +7,8 @@
   home-manager configuration with batteries included:
 
 ```shell
-mkdir -p ~/.config
+mkdir -p ~/.config/nix
+echo 'experimental-features = nix-command flakes' > ~/.config/nix/nix.conf
 nix flake new --template github:active-group/nix-starter-kit ~/.config/home-manager
 ```
 
@@ -22,8 +23,6 @@ nix flake new --template github:active-group/nix-starter-kit ~/.config/home-mana
 - Now execute the following commands from a shell:
 
 ```shell
-mkdir -p ~/.config/nix
-echo 'experimental-features = nix-command flakes' > ~/.config/nix/nix.conf
 nix run github:active-group/nix-starter-kit#home-manager -- switch
 ```
 
