@@ -7,10 +7,7 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    mac-app-util.url = "github:hraban/mac-app-util";
     flake-parts.url = "github:hercules-ci/flake-parts";
     active-accounting.url = "git+ssh://git@gitlab.active-group.de/ag/active-accounting.git";
     active-timetracking.url = "git+ssh://git@gitlab.active-group.de/ag/active-timetracking.git";
