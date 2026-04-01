@@ -6,14 +6,15 @@
         "flake-parts": "flake-parts",
         "hs-vcard": "hs-vcard",
         "hs-webview": "hs-webview",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "rapid": "rapid"
       },
       "locked": {
-        "lastModified": 1773130422,
-        "narHash": "sha256-Q2wbPV/Xt7im9EbuwtI+TUD00Ej09n6N9Jnb7b3jQxU=",
+        "lastModified": 1775030825,
+        "narHash": "sha256-QzBQQ48dqMO9xhV/diX/7LAaOPTb9+HsJT4R1YyVONM=",
         "ref": "refs/heads/main",
-        "rev": "417a0dae42f4c1cb59db5d43318bdbf82b03f1cd",
-        "revCount": 627,
+        "rev": "38ef701b55e33e5351681a044e4b7a4f37a51533",
+        "revCount": 631,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de/ag/active-accounting.git"
       },
@@ -996,15 +997,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1772795455,
-        "narHash": "sha256-mzR3dqk0i00l61lMDrrHnsgZmQTof+SnbA1aXpX/GHw=",
+        "lastModified": 1772956932,
+        "narHash": "sha256-M0yS4AafhKxPPmOHGqIV0iKxgNO8bHDWdl1kOwGBwRY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e99215c1a21cab2a995a3d01fe20d5714addea27",
+        "rev": "608d0cadfed240589a7eea422407a547ad626a14",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1124,6 +1126,22 @@
       "original": {
         "owner": "nix-ocaml",
         "repo": "nix-overlays",
+        "type": "github"
+      }
+    },
+    "rapid": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1770639045,
+        "narHash": "sha256-4rShZaw6t1Isqi99/iKPRp5ZAnE7QdMtRss4pjNFhMk=",
+        "owner": "eyeinsky",
+        "repo": "rapid",
+        "rev": "9a7eff9ccc462957ce0838654cd3f7af09cd82a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eyeinsky",
+        "repo": "rapid",
         "type": "github"
       }
     },
