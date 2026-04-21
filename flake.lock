@@ -6,14 +6,15 @@
         "flake-parts": "flake-parts",
         "hs-vcard": "hs-vcard",
         "hs-webview": "hs-webview",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "rapid": "rapid"
       },
       "locked": {
-        "lastModified": 1773130422,
-        "narHash": "sha256-Q2wbPV/Xt7im9EbuwtI+TUD00Ej09n6N9Jnb7b3jQxU=",
+        "lastModified": 1775030825,
+        "narHash": "sha256-QzBQQ48dqMO9xhV/diX/7LAaOPTb9+HsJT4R1YyVONM=",
         "ref": "refs/heads/main",
-        "rev": "417a0dae42f4c1cb59db5d43318bdbf82b03f1cd",
-        "revCount": 627,
+        "rev": "38ef701b55e33e5351681a044e4b7a4f37a51533",
+        "revCount": 631,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de/ag/active-accounting.git"
       },
@@ -281,11 +282,11 @@
         "nixpkgs-lib": "nixpkgs-lib_10"
       },
       "locked": {
-        "lastModified": 1772408722,
-        "narHash": "sha256-rHuJtdcOjK7rAHpHphUb1iCvgkU3GpfvicLMwwnfMT0=",
+        "lastModified": 1775087534,
+        "narHash": "sha256-91qqW8lhL7TLwgQWijoGBbiD4t7/q75KTi8NxjVmSmA=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "f20dc5d9b8027381c474144ecabc9034d6a839a3",
+        "rev": "3107b77cd68437b9a76194f0f7f9c55f2329ca5b",
         "type": "github"
       },
       "original": {
@@ -537,11 +538,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774559029,
-        "narHash": "sha256-deix7yg3j6AhjMPnFDCmWB3f83LsajaaULP5HH2j34k=",
+        "lastModified": 1775425411,
+        "narHash": "sha256-KY6HsebJHEe5nHOWP7ur09mb0drGxYSzE3rQxy62rJo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a0bb0d11514f92b639514220114ac8063c72d0a3",
+        "rev": "0d02ec1d0a05f88ef9e74b516842900c41f0f2fe",
         "type": "github"
       },
       "original": {
@@ -778,11 +779,11 @@
     },
     "nixpkgs-lib_10": {
       "locked": {
-        "lastModified": 1772328832,
-        "narHash": "sha256-e+/T/pmEkLP6BHhYjx6GmwP5ivonQQn0bJdH9YrRB+Q=",
+        "lastModified": 1774748309,
+        "narHash": "sha256-+U7gF3qxzwD5TZuANzZPeJTZRHS29OFQgkQ2kiTJBIQ=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "c185c7a5e5dd8f9add5b2f8ebeff00888b070742",
+        "rev": "333c4e0545a6da976206c74db8773a1645b5870a",
         "type": "github"
       },
       "original": {
@@ -964,11 +965,11 @@
     },
     "nixpkgs_13": {
       "locked": {
-        "lastModified": 1774860065,
-        "narHash": "sha256-Vn+G6SIapEOIYroFVOGpEnIQRemCTN86PgkpcxJXuAI=",
+        "lastModified": 1776766782,
+        "narHash": "sha256-T7qdxvRVfl8dLVqU3FRXKnXLAHRl0VL7J1VCEMw+aIA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4830cb6ec3bed242d6c4b7c01811a5df5b2a3be3",
+        "rev": "7a08b5e00d78bb2f2e94ac0a53319ab97db053a3",
         "type": "github"
       },
       "original": {
@@ -996,15 +997,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1772795455,
-        "narHash": "sha256-mzR3dqk0i00l61lMDrrHnsgZmQTof+SnbA1aXpX/GHw=",
+        "lastModified": 1772956932,
+        "narHash": "sha256-M0yS4AafhKxPPmOHGqIV0iKxgNO8bHDWdl1kOwGBwRY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e99215c1a21cab2a995a3d01fe20d5714addea27",
+        "rev": "608d0cadfed240589a7eea422407a547ad626a14",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1124,6 +1126,22 @@
       "original": {
         "owner": "nix-ocaml",
         "repo": "nix-overlays",
+        "type": "github"
+      }
+    },
+    "rapid": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1770639045,
+        "narHash": "sha256-4rShZaw6t1Isqi99/iKPRp5ZAnE7QdMtRss4pjNFhMk=",
+        "owner": "eyeinsky",
+        "repo": "rapid",
+        "rev": "9a7eff9ccc462957ce0838654cd3f7af09cd82a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eyeinsky",
+        "repo": "rapid",
         "type": "github"
       }
     },
