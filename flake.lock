@@ -10,11 +10,11 @@
         "rapid": "rapid"
       },
       "locked": {
-        "lastModified": 1777881248,
-        "narHash": "sha256-hP/Fa6/U3r7vUgNyv03Mse8KuVCmD4FOLlFiGHQYPnU=",
+        "lastModified": 1779086766,
+        "narHash": "sha256-HDjwO5lAG+KNPL32iyuZM2ULeuarAI9cihqd8VhQowQ=",
         "ref": "refs/heads/main",
-        "rev": "51060a71648993ac6b84ca80b61bb41134859c1a",
-        "revCount": 638,
+        "rev": "b90a28b1f07bf7336078d81ec84527c99b431457",
+        "revCount": 668,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de/ag/active-accounting.git"
       },
