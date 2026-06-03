@@ -95,6 +95,7 @@
                 self.homeModules.mac-app-util
                 self.homeModules.nix-starter-kit
                 self.homeModules.sieve
+                self.homeModules.thunderbird
                 self.homeModules.timetracking
                 self.homeModules.zsh
               ];
@@ -106,6 +107,7 @@
             mac-app-util = withInputs ./modules/mac-app-util;
             nix-starter-kit = withInputs ./modules/nix-starter-kit.nix;
             sieve = withInputs ./modules/sieve;
+            thunderbird = withInputs ./modules/thunderbird;
             timetracking = withInputs ./modules/timetracking;
             zsh = withInputs ./modules/zsh;
           };

@@ -39,7 +39,8 @@ in
       enable = true;
       userName = settings.email;
     };
-    zsh.enable = true;
+    thunderbird.enable = false;
     timetracking.enable = false;
+    zsh.enable = true;
   };
 }
