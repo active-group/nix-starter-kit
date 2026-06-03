@@ -1,6 +1,11 @@
 # Thunderbird
 
+This module provides thunderbird with the following things already set up:
+- AG address book
+- AG calendars
+
 This module currently allows management of AGly calendars via nix.
+
 It provides several usefull options (option prefix `active-group.thunderbird` omitted):
 
 - `enable` enables the module
@@ -47,4 +52,3 @@ your `home.nix` file:
 
 ## TODOs
 - add email to setup
-- add addressbook to setup

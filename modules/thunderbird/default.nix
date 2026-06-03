@@ -105,31 +105,43 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    accounts.calendar.accounts =
-      lib.attrsets.zipAttrsWith
-        (
-          name: values:
-          let
-            calendarInfo = builtins.elemAt values 0;
-            calendar = custom.mergeAttrsIgnoringNulls values;
-          in
-          mkCal {
-            url = calendarInfo.url;
-            extra = calendar;
-          }
-        )
-        (
-          let
-            calendarOptions = lib.attrsets.filterAttrs (n: v: cfg.calendars.${n}.enable) (
-              builtins.removeAttrs cfg.calendars [ "enableAGCalendars" ]
-            );
-          in
-          [
-            enabledCalendars
-            colors
-            calendarOptions
-          ]
-        );
+    accounts = {
+      calendar.accounts =
+        lib.attrsets.zipAttrsWith
+          (
+            name: values:
+            let
+              calendarInfo = builtins.elemAt values 0;
+              calendar = custom.mergeAttrsIgnoringNulls values;
+            in
+            mkCal {
+              url = calendarInfo.url;
+              extra = calendar;
+            }
+          )
+          (
+            let
+              calendarOptions = lib.attrsets.filterAttrs (n: v: cfg.calendars.${n}.enable) (
+                builtins.removeAttrs cfg.calendars [ "enableAGCalendars" ]
+              );
+            in
+            [
+              enabledCalendars
+              colors
+              calendarOptions
+            ]
+          );
+
+      contact.accounts."AG Addressbuch" = {
+        remote = {
+          userName = "leitz";
+          url = "https://calendar.active-group.de/addressbook/cdf53880-4c47-8484-5da3-4967cc565ece";
+          type = "carddav";
+          passwordCommand = "carddav";
+        };
+        thunderbird.enable = true;
+      };
+    };
 
     programs.thunderbird = {
       enable = true;
