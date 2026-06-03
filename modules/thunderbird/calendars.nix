@@ -1,11 +1,11 @@
 {
   geburtstage = {
     name = "Geburtstage";
-    url = "https://keith.active-group.de/contacts/57c3c452-87e8-bad4-2998-3d6bf99303a8";
+    url = "https://calendar.active-group.de/contacts/57c3c452-87e8-bad4-2998-3d6bf99303a8";
   };
   regeltermine = {
     name = "Regeltermine";
-    url = "https://keith.active-group.de/contacts/ab587627-e824-7274-dea9-86b34f8a3fc7";
+    url = "https://calendar.active-group.de/contacts/ab587627-e824-7274-dea9-86b34f8a3fc7";
   };
   pr = {
     name = "PR";
