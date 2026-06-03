@@ -134,7 +134,7 @@ in
 
       contact.accounts."AG Addressbuch" = {
         remote = {
-          userName = "leitz";
+          userName = cfg.userName;
           url = "https://calendar.active-group.de/addressbook/cdf53880-4c47-8484-5da3-4967cc565ece";
           type = "carddav";
           passwordCommand = "carddav";
