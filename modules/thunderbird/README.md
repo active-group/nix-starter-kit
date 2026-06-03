@@ -44,3 +44,7 @@ your `home.nix` file:
     };
   };
 ```
+
+## TODOs
+- add email to setup
+- add addressbook to setup
