@@ -146,6 +146,9 @@ in
     programs.thunderbird = {
       enable = true;
       profiles.${cfg.profile}.isDefault = true;
+      settings = {
+        "calendar.week.start" = 1;
+      };
     };
   };
 }
