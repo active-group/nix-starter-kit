@@ -92,6 +92,7 @@
                 self.homeModules.emacs
                 self.homeModules.git
                 self.homeModules.khard
+                self.homeModules.ldap
                 self.homeModules.mac-app-util
                 self.homeModules.nix-starter-kit
                 self.homeModules.sieve
@@ -104,6 +105,7 @@
             emacs = withInputs ./modules/emacs;
             git = withInputs ./modules/git;
             khard = withInputs ./modules/khard;
+            ldap = withInputs ./modules/ldap;
             mac-app-util = withInputs ./modules/mac-app-util;
             nix-starter-kit = withInputs ./modules/nix-starter-kit.nix;
             sieve = withInputs ./modules/sieve;
