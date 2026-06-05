@@ -3,6 +3,7 @@
 This module provides thunderbird with the following things already set up:
 - AG address book
 - AG calendars
+- AG eMail
 
 This module currently allows management of AGly calendars via nix.
 
@@ -49,6 +50,3 @@ your `home.nix` file:
     };
   };
 ```
-
-## TODOs
-- add email to setup

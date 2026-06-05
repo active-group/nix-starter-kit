@@ -6,6 +6,8 @@
 let
   cfg = config.active-group.thunderbird;
 
+  userName = config.active-group.ldap.userName;
+
   calendars = import ./calendars.nix;
   custom = import ./custom.nix { inherit lib; };
 
@@ -37,7 +39,7 @@ let
       remote = {
         type = "caldav";
         inherit url;
-        inherit (cfg) userName;
+        inherit userName;
       };
       thunderbird = {
         enable = true;
@@ -79,10 +81,6 @@ in
 {
   options.active-group.thunderbird = {
     enable = lib.mkEnableOption "thunderbird";
-    userName = lib.mkOption {
-      type = lib.types.str;
-      description = "LDAP username used to sync calendars.";
-    };
     profile = lib.mkOption {
       type = lib.types.str;
       default = "ag";
@@ -134,10 +132,39 @@ in
 
       contact.accounts."AG Addressbuch" = {
         remote = {
-          userName = cfg.userName;
+          inherit userName;
           url = "https://calendar.active-group.de/addressbook/cdf53880-4c47-8484-5da3-4967cc565ece";
           type = "carddav";
           passwordCommand = "carddav";
+        };
+        thunderbird.enable = true;
+      };
+
+      email.accounts.${config.active-group.ldap.fullName} = {
+        primary = true;
+        userName = config.active-group.ldap.email;
+        address = config.active-group.ldap.email;
+        realName = config.active-group.ldap.fullName;
+        signature = {
+          showSignature = "append";
+          text = ''
+            ${config.active-group.ldap.fullName}
+            ${config.active-group.ldap.email}
+            ${config.active-group.ldap.phoneNumber}
+
+            Active Group GmbH
+            Hechinger Straße 12/1
+            72072 Tübingen
+            Registergericht: Amtsgericht Stuttgart, HRB 224404
+            Geschäftsführer: Dr. Michael Sperber'';
+        };
+        imap = {
+          host = "mail.active-group.de";
+          port = 993;
+        };
+        smtp = {
+          host = "mail.active-group.de";
+          port = 465;
         };
         thunderbird.enable = true;
       };
