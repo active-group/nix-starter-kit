@@ -34,8 +34,6 @@ your `home.nix` file:
 ```nix
   active-group.thunderbird = {
     enable = true;
-    username = <ldap-username>;
-    profile = <current-thunderbird-profile>;
     calendars = {
       enableAGCalendars = true;
       felix = {
