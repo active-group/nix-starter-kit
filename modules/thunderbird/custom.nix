@@ -22,4 +22,16 @@ rec {
   mergeAttrsIgnoringNulls =
     list:
     lib.foldl' lib.recursiveUpdate { } (map (attrs: lib.filterAttrs (_: v: v != null) attrs) list);
+
+  transformCalendar =
+    calendar:
+    let
+      notifications = calendar.notifications;
+
+      notificationTimes = lib.concatStringsSep ", " notifications;
+    in
+    (builtins.removeAttrs calendar [ "notifications" ])
+    // {
+      "notifications.times" = notificationTimes;
+    };
 }

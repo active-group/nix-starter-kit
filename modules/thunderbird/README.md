@@ -18,6 +18,11 @@ It provides several usefull options (option prefix `active-group.thunderbird` om
 - `calendars.<name>.readOnly` wheather the calendar is editable, defaults to `true`
 - `calendars.<name>.supressAlarms` wheather alarms on this calendar should be supressed, defaults to `true`
 - `calendars.<name>.color` hex code for the color to be used for the calendar
+- `calendars.<name>.notifications` a list of string specifying the notifications for the calendar
+  - notification can be:
+    - `-PTXXM` for a notification XX minutes before the start of the event
+    - `-PTXXH` for a notification XX hours before the start of the event
+    - `-PXXD` for a notification XX days before the start of the event
 
 The `<name>` of a calendar is the attribute set key in [calendars.nix](./calendars.nix).
 When `enableAGCalendars` is set to `true`, all calendars are active unless they are disabled explicitly by setting `calendars.<name>.enable = false`.

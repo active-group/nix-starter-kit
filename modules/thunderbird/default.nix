@@ -70,9 +70,16 @@ let
           default = true;
           description = "Wheather the calender should notify on events.";
         };
+
         color = lib.mkOption {
           type = lib.types.nullOr lib.types.str;
           description = "Color for the calendar.";
+        };
+
+        notifications = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [ ];
+          description = "Notifications for events in the calendar.";
         };
       };
     };
@@ -110,7 +117,7 @@ in
             name: values:
             let
               calendarInfo = builtins.elemAt values 0;
-              calendar = custom.mergeAttrsIgnoringNulls values;
+              calendar = custom.transformCalendar (custom.mergeAttrsIgnoringNulls values);
             in
             mkCal {
               url = calendarInfo.url;
