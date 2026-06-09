@@ -157,7 +157,9 @@ in
           text = ''
             ${config.active-group.ldap.fullName}
             ${config.active-group.ldap.email}
-            ${config.active-group.ldap.phoneNumber}
+            ${lib.optionalString (
+              config.active-group.ldap.phoneNumber != null
+            ) config.active-group.ldap.phoneNumber}
 
             Active Group GmbH
             Hechinger Straße 12/1
