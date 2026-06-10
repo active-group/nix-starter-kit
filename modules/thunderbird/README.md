@@ -32,24 +32,26 @@ Add something like the following to the corresponding configuration section in
 your `home.nix` file:
 
 ```nix
-  active-group.thunderbird = {
-    enable = true;
-    calendars = {
-      enableAGCalendars = true;
-      felix = {
-        readOnly = false;
-        suppressAlarms = false;
-        color = "#ff2968";
-      };
-      geburtstage.color = "#0000ff";
-      regeltermine.color = "#0000ff";
+  active-group = {
+    thunderbird = {
+      enable = true;
+      calendars = {
+        enableAGCalendars = true;
+        felix = {
+          readOnly = false;
+          suppressAlarms = false;
+          color = "#ff2968";
+        };
+        geburtstage.color = "#0000ff";
+        regeltermine.color = "#0000ff";
 
-      bianca-schulungen.enable = false;
-      felix-schulungen.enable = false;
-      marco-schulungen.enable = false;
-      marcus-schulungen.enable = false;
-      markus-schulungen.enable = false;
-      pr.enable = false;
+        bianca-schulungen.enable = false;
+        felix-schulungen.enable = false;
+        marco-schulungen.enable = false;
+        marcus-schulungen.enable = false;
+        markus-schulungen.enable = false;
+        pr.enable = false;
+      };
     };
   };
 ```
