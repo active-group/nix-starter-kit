@@ -94,9 +94,19 @@ in
       description = "The profile to be used for configuration.";
     };
 
+    addresses.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable the AG address book in thunderbird.";
+    };
     calendars = lib.mkOption {
       type = lib.types.submodule {
         options = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+            description = "Enable calendars in thunderbird.";
+          };
           enableAGCalendars = lib.mkEnableOption {
             default = true;
           };
@@ -112,11 +122,17 @@ in
         }));
       };
     };
+    email.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable AG email in thunderbird.";
+    };
+
   };
 
   config = lib.mkIf cfg.enable {
     accounts = {
-      calendar.accounts =
+      calendar.accounts = lib.mkIf cfg.calendars.enable (
         lib.attrsets.zipAttrsWith
           (
             name: values:
@@ -135,6 +151,7 @@ in
                 builtins.removeAttrs cfg.calendars [
                   "enableAGCalendars"
                   "generateColors"
+                  "enable"
                 ]
               );
             in
@@ -143,9 +160,10 @@ in
               colors
               calendarOptions
             ]
-          );
+          )
+      );
 
-      contact.accounts."AG Addressbuch" = {
+      contact.accounts."AG Addressbuch" = lib.mkIf cfg.addresses.enable {
         remote = {
           inherit userName;
           url = "https://calendar.active-group.de/addressbook/cdf53880-4c47-8484-5da3-4967cc565ece";
@@ -155,7 +173,7 @@ in
         thunderbird.enable = true;
       };
 
-      email.accounts.${config.active-group.ldap.fullName} = {
+      email.accounts.${config.active-group.ldap.fullName} = lib.mkIf cfg.email.enable {
         primary = true;
         userName = config.active-group.ldap.email;
         address = config.active-group.ldap.email;
