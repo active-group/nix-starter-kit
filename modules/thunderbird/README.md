@@ -13,6 +13,11 @@ It provides several usefull options (option prefix `active-group.thunderbird` om
 - `userName` the username used for calender sync
 - `profile` the thunderbird profile under which the setup should be done
 - `calendars.enableAGCalendars` enables all AG calendars, defaults to `true`
+- `calendars.generateColors`
+  - a function taking two argument the calendar index and the total number of calendars
+  - returning a string representing a color
+  - defaults to a grayscale function
+  - e.g. `generateColors = i: n: "#FF00CC"`
 - `calendars.<name>.enable` enable specific AGly calendar, defaults to `calendars.enableAGCalendars`
 - `calendars.<name>.name` set the name for the calendar, defaults to the value set in [calendar.nix](./calendars.nix)
 - `calendars.<name>.readOnly` wheather the calendar is editable, defaults to `true`

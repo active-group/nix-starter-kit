@@ -23,7 +23,7 @@ let
       lib.mergeAttrsList (
         lib.imap0 (i: name: {
           ${name} = {
-            color = custom.grayscale i calendarCount;
+            color = cfg.calendars.generateColors i calendarCount;
           };
         }) (lib.filter (calName: cfg.calendars.${calName}.enable) calendarNames)
       )
@@ -100,6 +100,11 @@ in
           enableAGCalendars = lib.mkEnableOption {
             default = true;
           };
+          generateColors = lib.mkOption {
+            type = lib.types.functionTo (lib.types.functionTo lib.types.nonEmptyStr);
+            default = custom.grayscale;
+            description = "Function for generating calendar colors.";
+          };
         }
         // (lib.attrsets.genAttrs' calendarNames (calName: {
           name = calName;
@@ -127,7 +132,10 @@ in
           (
             let
               calendarOptions = lib.attrsets.filterAttrs (n: v: cfg.calendars.${n}.enable) (
-                builtins.removeAttrs cfg.calendars [ "enableAGCalendars" ]
+                builtins.removeAttrs cfg.calendars [
+                  "enableAGCalendars"
+                  "generateColors"
+                ]
               );
             in
             [
