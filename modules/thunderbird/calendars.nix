@@ -28,10 +28,6 @@
     name = "Bianca Lutz";
     url = "https://calendar.active-group.de/lutz/01022be6-bdb6-4568-c475-c8d555c86e95";
   };
-  bianca-schulungen = {
-    name = "Bianca Schulungstermine";
-    url = "https://calendar.active-group.de/lutz/cc3a2aea-95af-8d8a-34ec-e11da3cf1425";
-  };
   christina = {
     name = "Christina Zeller";
     url = "https://calendar.active-group.de/zeller/84591adb-40e3-67f7-559d-5937ca7a7775";
@@ -43,10 +39,6 @@
   felix = {
     name = "Felix Leitz";
     url = "https://calendar.active-group.de/leitz/2be74539-64ce-fc13-a101-e0317799452c";
-  };
-  felix-schulungen = {
-    name = "Felix Schulungstermine";
-    url = "https://calendar.active-group.de/leitz/5C71751B-82E9-44C6-BC8A-65FD1EEAFEA9";
   };
   heli = {
     name = "Heli Dobretzberger";
@@ -60,25 +52,13 @@
     name = "Marco Schneider";
     url = "https://calendar.active-group.de/schneider/6F723460-1FCB-4C9A-BE67-F07B8EE159ED";
   };
-  marco-schulungen = {
-    name = "Marco Schulungstermine";
-    url = "https://calendar.active-group.de/schneider/629c7186-2ca9-1e9e-1acc-306a7fee36e8";
-  };
   marcus = {
     name = "Marcus Crestani";
     url = "https://calendar.active-group.de/crestani/283B40DE-AE6B-42A0-8E08-8840F7460516";
   };
-  marcus-schulungen = {
-    name = "Marcus Schulungstermine";
-    url = "https://calendar.active-group.de/crestani/428BAC8F-7FA8-41F5-857C-1ACF4E6F8E85";
-  };
   markus = {
     name = "Markus Schlegel";
     url = "https://calendar.active-group.de/schlegel/42E58497-27C1-421A-893A-BDADC9082AC9";
-  };
-  markus-schulungen = {
-    name = "Markus Schulungstermine";
-    url = "https://calendar.active-group.de/schlegel/5e849367-084c-1463-dbe7-912d4c4b0a73";
   };
   micha = {
     name = "Micha Riedlinger";

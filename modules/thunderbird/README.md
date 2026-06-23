@@ -44,11 +44,6 @@ your `home.nix` file:
       geburtstage.color = "#0000ff";
       regeltermine.color = "#0000ff";
 
-      bianca-schulungen.enable = false;
-      felix-schulungen.enable = false;
-      marco-schulungen.enable = false;
-      marcus-schulungen.enable = false;
-      markus-schulungen.enable = false;
       pr.enable = false;
     };
   };
