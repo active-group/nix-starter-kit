@@ -10,6 +10,6 @@
         recursive = true;
       };
       ".config/zsh/ag.zsh".source = ./ag.zsh;
-    }
+    };
   };
 }
