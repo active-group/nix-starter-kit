@@ -63,5 +63,9 @@ in
     in
     lib.mkIf cfg.enable {
       home.packages = [ ag-sieve ];
+      home.file.".config/ag-sieve" = {
+        source = ./ag-sieve;
+        recursive = true;
+      };
     };
 }
