@@ -115,7 +115,14 @@ It provides several usefull options (option prefix `active-group.thunderbird` om
 - `enable` enables the module
 - `userName` the username used for calender sync
 - `profile` the thunderbird profile under which the setup should be done
+- `adresses.enable` enables address book management via thunderbird, defaults to `true`
+- `calendars.enable` enables calendar management via thunderbird, defaults to `true`
 - `calendars.enableAGCalendars` enables all AG calendars, defaults to `true`
+- `calendars.generateColors`
+  - a function taking two argument the calendar index and the total number of calendars
+  - returning a string representing a color
+  - defaults to a grayscale function
+  - e.g. `generateColors = i: n: "#FF00CC"`
 - `calendars.<name>.enable` enable specific AGly calendar, defaults to `calendars.enableAGCalendars`
 - `calendars.<name>.name` set the name for the calendar, defaults to the value set in [calendar.nix](./calendars.nix)
 - `calendars.<name>.readOnly` wheather the calendar is editable, defaults to `true`
@@ -126,6 +133,7 @@ It provides several usefull options (option prefix `active-group.thunderbird` om
     - `-PTXXM` for a notification XX minutes before the start of the event
     - `-PTXXH` for a notification XX hours before the start of the event
     - `-PXXD` for a notification XX days before the start of the event
+- `email.enable` enables email management via thunderbird, defaults to `true`
 
 The `<name>` of a calendar is the attribute set key in [calendars.nix](./calendars.nix).
 When `enableAGCalendars` is set to `true`, all calendars are active unless they are disabled explicitly by setting `calendars.<name>.enable = false`.
@@ -135,19 +143,21 @@ Add something like the following to the corresponding configuration section in
 your `home.nix` file:
 
 ```nix
-  active-group.thunderbird = {
-    enable = true;
-    calendars = {
-      enableAGCalendars = true;
-      felix = {
-        readOnly = false;
-        suppressAlarms = false;
-        color = "#ff2968";
-      };
-      geburtstage.color = "#0000ff";
-      regeltermine.color = "#0000ff";
+  active-group = {
+    thunderbird = {
+      enable = true;
+      calendars = {
+        enableAGCalendars = true;
+        felix = {
+          readOnly = false;
+          suppressAlarms = false;
+          color = "#ff2968";
+        };
+        geburtstage.color = "#0000ff";
+        regeltermine.color = "#0000ff";
 
-      pr.enable = false;
+        pr.enable = false;
+      };
     };
   };
 ```
