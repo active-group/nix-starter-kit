@@ -124,7 +124,7 @@ It provides several usefull options (option prefix `active-group.thunderbird` om
   - defaults to a grayscale function
   - e.g. `generateColors = i: n: "#FF00CC"`
 - `calendars.<name>.enable` enable specific AGly calendar, defaults to `calendars.enableAGCalendars`
-- `calendars.<name>.name` set the name for the calendar, defaults to the value set in [calendar.nix](./calendars.nix)
+- `calendars.<name>.name` set the name for the calendar, defaults to the value set in [calendar.nix](modules/thunderbird/calendars.nix)
 - `calendars.<name>.readOnly` wheather the calendar is editable, defaults to `true`
 - `calendars.<name>.supressAlarms` wheather alarms on this calendar should be supressed, defaults to `true`
 - `calendars.<name>.color` hex code for the color to be used for the calendar
@@ -135,7 +135,7 @@ It provides several usefull options (option prefix `active-group.thunderbird` om
     - `-PXXD` for a notification XX days before the start of the event
 - `email.enable` enables email management via thunderbird, defaults to `true`
 
-The `<name>` of a calendar is the attribute set key in [calendars.nix](./calendars.nix).
+The `<name>` of a calendar is the attribute set key in [calendars.nix](modules/thunderbird/calendars.nix).
 When `enableAGCalendars` is set to `true`, all calendars are active unless they are disabled explicitly by setting `calendars.<name>.enable = false`.
 If `enableAGCalendars` is set to `false`, all calendars are inactive unless they are enabled explicitly by setting `calendars.<name>.enable = true`.
 
