@@ -206,6 +206,7 @@ additionally provide the wrapped scripts
 - `tt-report-report-timetracking`
 - `tt-report-report-arbeitszeiten`
 - `tt-report-report-abrechenbare-zeiten`
+- `tt-admin-kimai-config-sync`
 
 which have the API tokens and API URLs already set.
 
