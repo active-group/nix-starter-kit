@@ -20,10 +20,6 @@
     name = "Arjin Furan";
     url = "https://calendar.active-group.de/furan/1C77ED23-94E3-42F6-9D2E-7504BF501A3D";
   };
-  beat = {
-    name = "Beat Hagenlocher";
-    url = "https://calendar.active-group.de/hagenlocher/33eccd22-09c8-ab5c-e71a-5fc4008377cf";
-  };
   bianca = {
     name = "Bianca Lutz";
     url = "https://calendar.active-group.de/lutz/01022be6-bdb6-4568-c475-c8d555c86e95";
