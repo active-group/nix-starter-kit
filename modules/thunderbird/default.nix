@@ -19,7 +19,7 @@ let
   calendarCount = lib.length calendarNames;
 
   colors =
-    if cfg.calendars.enableAGCalendars then
+    if cfg.calendars.agCalendars.enable then
       lib.mergeAttrsList (
         lib.imap0 (i: name: {
           ${name} = {
@@ -53,7 +53,7 @@ let
       options = {
         enable = lib.mkOption {
           type = lib.types.bool;
-          default = cfg.calendars.enableAGCalendars;
+          default = cfg.calendars.agCalendars.enable;
           description = "Wheather to enable the calendar.";
         };
         name = lib.mkOption {
@@ -81,6 +81,12 @@ let
           default = [ ];
           description = "Notifications for events in the calendar.";
         };
+
+        hide = lib.mkOption {
+          type = lib.types.bool;
+          default = cfg.calendars.agCalendars.hide;
+          description = "Hide the calendar events.";
+        };
       };
     };
   };
@@ -107,9 +113,16 @@ in
             default = true;
             description = "Enable calendars in thunderbird.";
           };
-          enableAGCalendars = lib.mkEnableOption {
-            default = true;
+          agCalendars = {
+            enable = lib.mkEnableOption "agCalendars";
+
+            hide = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = "Hide the calendar events.";
+            };
           };
+
           generateColors = lib.mkOption {
             type = lib.types.functionTo (lib.types.functionTo lib.types.nonEmptyStr);
             default = custom.grayscale;
@@ -149,7 +162,7 @@ in
             let
               calendarOptions = lib.attrsets.filterAttrs (n: v: cfg.calendars.${n}.enable) (
                 builtins.removeAttrs cfg.calendars [
-                  "enableAGCalendars"
+                  "agCalendars"
                   "generateColors"
                   "enable"
                 ]
