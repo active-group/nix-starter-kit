@@ -4,6 +4,8 @@
 
 ;;; Work around some issues with PATH on macOS. FIXME(Johannes/Mike): test this
 (when (memq window-system '(mac ns x))
+  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "TEXINPUTS" "BIBINPUTS"
+					 "NIX_PATH" "OPENSSL_X509_CERT_FILE" "CURL_CA_BUNDLE" "GIT_SSL_CAINFO"))
   (exec-path-from-shell-initialize))
 
 ;; Work around focus issues with frames created by 'emacsclient'
