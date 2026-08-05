@@ -23,15 +23,16 @@ rec {
     list:
     lib.foldl' lib.recursiveUpdate { } (map (attrs: lib.filterAttrs (_: v: v != null) attrs) list);
 
+  renameMapAttr =
+    oldName: newName: f: attrs:
+    (builtins.removeAttrs attrs [ oldName ])
+    // {
+      ${newName} = f attrs.${oldName};
+    };
+
   transformCalendar =
     calendar:
-    let
-      notifications = calendar.notifications;
-
-      notificationTimes = lib.concatStringsSep ", " notifications;
-    in
-    (builtins.removeAttrs calendar [ "notifications" ])
-    // {
-      "notifications.times" = notificationTimes;
-    };
+    renameMapAttr "hide" "calendar-main-in-composite" (hide: !hide) (
+      renameMapAttr "notifications" "notifications.times" (lib.concatStringsSep ", ") calendar
+    );
 }

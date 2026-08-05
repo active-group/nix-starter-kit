@@ -117,13 +117,14 @@ It provides several usefull options (option prefix `active-group.thunderbird` om
 - `profile` the thunderbird profile under which the setup should be done
 - `adresses.enable` enables address book management via thunderbird, defaults to `true`
 - `calendars.enable` enables calendar management via thunderbird, defaults to `true`
-- `calendars.enableAGCalendars` enables all AG calendars, defaults to `true`
+- `calendars.agCalendars.enable` enables all AG calendars, defaults to `true`
+- `calendars.agCalendars.hide` hides the enabled AG calendars, defaults to `false`
 - `calendars.generateColors`
   - a function taking two argument the calendar index and the total number of calendars
   - returning a string representing a color
   - defaults to a grayscale function
   - e.g. `generateColors = i: n: "#FF00CC"`
-- `calendars.<name>.enable` enable specific AGly calendar, defaults to `calendars.enableAGCalendars`
+- `calendars.<name>.enable` enable specific AGly calendar, defaults to `calendars.agCalendars.enable`
 - `calendars.<name>.name` set the name for the calendar, defaults to the value set in [calendar.nix](modules/thunderbird/calendars.nix)
 - `calendars.<name>.readOnly` wheather the calendar is editable, defaults to `true`
 - `calendars.<name>.supressAlarms` wheather alarms on this calendar should be supressed, defaults to `true`
@@ -133,11 +134,12 @@ It provides several usefull options (option prefix `active-group.thunderbird` om
     - `-PTXXM` for a notification XX minutes before the start of the event
     - `-PTXXH` for a notification XX hours before the start of the event
     - `-PXXD` for a notification XX days before the start of the event
+- `calendars.<name>.hide` hides specific AGly calendar, defaults to `calendars.agCalendars.hide`
 - `email.enable` enables email management via thunderbird, defaults to `true`
 
 The `<name>` of a calendar is the attribute set key in [calendars.nix](modules/thunderbird/calendars.nix).
-When `enableAGCalendars` is set to `true`, all calendars are active unless they are disabled explicitly by setting `calendars.<name>.enable = false`.
-If `enableAGCalendars` is set to `false`, all calendars are inactive unless they are enabled explicitly by setting `calendars.<name>.enable = true`.
+When `agCalendars.enable` is set to `true`, all calendars are active unless they are disabled explicitly by setting `calendars.<name>.enable = false`.
+If `agCalendars.enable` is set to `false`, all calendars are inactive unless they are enabled explicitly by setting `calendars.<name>.enable = true`.
 
 Add something like the following to the corresponding configuration section in
 your `home.nix` file:
@@ -147,7 +149,7 @@ your `home.nix` file:
     thunderbird = {
       enable = true;
       calendars = {
-        enableAGCalendars = true;
+        agCalendars.enable = true;
         felix = {
           readOnly = false;
           suppressAlarms = false;
