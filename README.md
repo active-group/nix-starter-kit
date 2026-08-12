@@ -110,6 +110,11 @@ This module provides thunderbird with the following things already set up:
 
 This module currently allows management of AGly calendars via nix.
 
+**IMPORTANT** Thunderbird manages its config config in a two stage process, which does not
+allow the removal of calendars. Therefore when removing a calendar via nix, it has to be deleted in
+thunderbird as well.
+So first remove the calendar from the nix config, then after a switch remove it thunderbird and restart. 
+
 It provides several usefull options (option prefix `active-group.thunderbird` omitted):
 
 - `enable` enables the module
