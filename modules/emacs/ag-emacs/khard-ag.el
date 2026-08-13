@@ -8,7 +8,10 @@
 ;; In that buffer, you can:
 
 ;; - press m to generate an e-mail to that contact
+;; - press d to dial the phone number of that contact
+;; - press e to edit the entry of that contact
 ;; - press C-l l to store an org-mode link to that contact
+;; - press q to quit
 
 ;; org-mode links have the format khard:<uid>#<name>
 
@@ -16,12 +19,11 @@
 
 (require 'yaml-mode)
 (require 'yaml)
+(require 'khardel)
 
 (defvar-local khard-ag-contact nil
   "Store the contact associated with current buffer.
 If nil, the buffer represents a new contact.")
-
-;; FIXME: elide all the entries that are null
 
 (defun khard-ag-show ()
   "Show CONTACT in a new buffer."
@@ -31,9 +33,13 @@ If nil, the buffer represents a new contact.")
     (khard-ag--show contact)))
 
 (defun khard-ag--show (contact)
-  (let ((buffer (generate-new-buffer (format "*khard-ag<%s>*" (cdr contact)))))
+  (let* ((yaml
+	  (with-temp-buffer
+	    (call-process "khard" nil t t "show" "--format" "yaml" (format "uid:%s" (car contact)))
+	    (khard-ag--yaml)))
+	 (buffer (generate-new-buffer (format "*khard-ag<%s>*" (cdr contact)))))
     (with-current-buffer buffer
-      (call-process "khard" nil t nil "show" "--format" "yaml" (format "uid:%s" (car contact)))
+      (insert (yaml-encode (khard-ag--sanitize-yaml yaml)))
       (goto-char (point-min))
       (khard-ag-show-mode)
       (read-only-mode)
@@ -81,18 +87,41 @@ Return the contact."
          do (setf (map-elt contacts (match-string 2)) (cons (match-string 1) (match-string 2)))
          finally return contacts)))))
 
+(defun khard-ag--sanitize-yaml (props)
+  (seq-filter #'identity
+	      (seq-map (lambda (entry)
+			 (cond
+			  ((eq (cdr entry) :null)
+			   nil)
+			  ((listp (cdr entry))
+			   (let ((sanitized
+				  (khard-ag--sanitize-yaml (cdr entry))))
+			     (if (null sanitized)
+				 '()
+			       (cons (car entry)
+				     sanitized))))
+			  (t entry)))
+		       props)))
+   
 (defvar khard-ag-show-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "m") #'khard-ag-prepare-email)
     (define-key map (kbd "C-c m") #'khard-ag-prepare-email)
-    (define-key map (kbd "q") #'ag-khard-show-quit)
+    (define-key map (kbd "q") #'khard-ag-show-quit)
+    (define-key map (kbd "e") #'khard-ag-show-edit)
+    (define-key map (kbd "d") #'khard-ag-show-dial)
     map)
   "Keymap for `khard-ag-show-mode'.")
 
-(defun ag-khard-show-quit ()
+(defun khard-ag-show-quit ()
+  (interactive)
   (kill-buffer (current-buffer)))
 
-(defun ag-khard-normalize-emails (emails)
+(defun khard-ag-show-edit ()
+  (interactive)
+  (khardel-edit-contact khard-ag-contact))
+
+(defun khard-ag--normalize-entries (emails)
   (apply #'append
 	 (mapcar (lambda (entry)
 		   (cond
@@ -102,12 +131,20 @@ Return the contact."
 		    ((vectorp entry) (append entry nil))))
 		 emails)))
 
-(defun khard-ag-emails ()
+(defun khard-ag--yaml ()
   (let ((s (buffer-string)))
     (set-text-properties 0 (length s) nil s)
-    (let* ((props (yaml-parse-string s :object-type 'alist))
-	   (emails (mapcar #'cdr (cdr (assq 'Email props)))))
-      (ag-khard-normalize-emails emails))))
+    (yaml-parse-string s :object-type 'alist)))
+
+(defun khard-ag-emails ()
+  (let* ((props (khard-ag--yaml))
+	 (emails (mapcar #'cdr (cdr (assq 'Email props)))))
+    (khard-ag--normalize-entries emails)))
+
+(defun khard-ag-phones ()
+  (let* ((props (khard-ag--yaml))
+	 (phones (mapcar #'cdr (cdr (assq 'Phone props)))))
+    (khard-ag--normalize-entries phones)))
 
 (defun khard-ag-prepare-email ()
   (interactive)
@@ -119,6 +156,20 @@ Return the contact."
 	   (t (completing-read "Select email: " emails)))))
     (when (stringp email)
       (compose-mail email))))
+
+(defun khard-ag--dial (phone-string)
+  (browse-url (concat "tel:" phone-string)))
+
+(defun khard-ag-show-dial ()
+  (interactive)
+  (let* ((phones (khard-ag-phones))
+	 (phone
+	  (cond
+	   ((null phones) (error "no phone in this vCard"))
+	   ((null (cdr phones)) (car phones))
+	   (t (completing-read "Select phone: " phones)))))
+    (when (stringp phone)
+      (khard-ag--dial phone))))
 
 (define-derived-mode khard-ag-show-mode yaml-mode "Khard-ag"
   "Show a contact through a YAML representation.")
