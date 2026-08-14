@@ -42,6 +42,8 @@ in
               p.exec-path-from-shell
               p.ledger-mode
               p.magit
+              p.khardel
+              p.yaml # for khard-ag
             ]
             ++ (cfg.additionalPackages p)
           );
