@@ -14,10 +14,12 @@
 ;; Common/base setup: completion, magit, grep etc.
 (require 'ag-common)
 
+;; Better addressbook/khard integration
+(require 'khard-ag)
+
 ;; Specific technologies that not everyone might need
 (require 'ag-latex)
 (require 'ag-ledger)
-
 
 ;;; Examples for custom code that would go into this file:
 
