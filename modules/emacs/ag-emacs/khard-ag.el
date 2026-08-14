@@ -159,8 +159,8 @@ Return the contact."
       (compose-mail email))))
 
 (defun khard-ag--dial (phone-string)
-  (let ((sanitized (replace-regexp-in-string "[-() ]" "" "(0162) 2153292"))) ; funky things happen with parens in phone numbers
-    (browse-url (concat "tel:" phone-string))))
+  (let ((sanitized (replace-regexp-in-string "[-() ]" "" phone-string))) ; funky things happen with parens in phone numbers
+    (browse-url (concat "tel:" sanitized))))
 
 (defun khard-ag-show-dial ()
   (interactive)
