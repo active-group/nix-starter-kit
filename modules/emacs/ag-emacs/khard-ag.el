@@ -20,6 +20,7 @@
 (require 'yaml-mode)
 (require 'yaml)
 (require 'khardel)
+(require 'ol) ; Org links library
 
 (defvar-local khard-ag-contact nil
   "Store the contact associated with current buffer.
