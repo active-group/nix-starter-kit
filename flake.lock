@@ -10,11 +10,11 @@
         "rapid": "rapid"
       },
       "locked": {
-        "lastModified": 1785313906,
-        "narHash": "sha256-k/ovIpfn+e8hktcbdkFBEUrVrrK9OnvuhdsS0Yb/pgs=",
+        "lastModified": 1788247009,
+        "narHash": "sha256-NZReC7vILddWoCUUzBjK/E0VpzteF9iSBoek/nDsH8o=",
         "ref": "refs/heads/main",
-        "rev": "242e990c955abd42c24e6bd079992e60fc891f9f",
-        "revCount": 728,
+        "rev": "32d4698c484156d741980b9a7f11cb276b31510e",
+        "revCount": 764,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de/ag/active-accounting.git"
       },
@@ -281,11 +281,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1778716662,
-        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "lastModified": 1785627969,
+        "narHash": "sha256-4dtXQk/NMePegK/nWp5NSeuZKLATItOq61lpEvmXqGw=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "rev": "427bf4bd9435fdf21321c8cc628c24efc14c0f7a",
         "type": "github"
       },
       "original": {
@@ -842,11 +842,11 @@
     },
     "nixpkgs-lib": {
       "locked": {
-        "lastModified": 1777168982,
-        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
+        "lastModified": 1785031560,
+        "narHash": "sha256-OmshNvn2vupOFpYinLUu+1Dnpu4n7Q5N3ggGVNHpkUI=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
+        "rev": "0e79af5e3d4dcfcd676ab5ba3f95d2e3352e078c",
         "type": "github"
       },
       "original": {
@@ -1090,11 +1090,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1781607440,
-        "narHash": "sha256-rxO+uc/KFbSJp+pgyXRuAX6QlG9hJdnt0BXpEQRXY+U=",
+        "lastModified": 1786963906,
+        "narHash": "sha256-3tkeMWSvHPo3tYljfXbPC/TgknikU1GvdVr/DkdfvE0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3e41b24abd260e8f71dbe2f5737d24122f972158",
+        "rev": "f4b6996c4e8b9ee06ce147ec344c885f51071b14",
         "type": "github"
       },
       "original": {
