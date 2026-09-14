@@ -11,8 +11,12 @@
 (setq TeX-parse-self t)
 
 (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
-(setq TeX-view-program-list
-      '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+
+(if (memq window-system '(mac ns x))
+    (setq TeX-view-program-list
+	  '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+  (setq TeX-view-program-list
+	'(("Evince" ,(TeX-view-program-select-evince "gnome" "evince") "evince"))))
 
 (setq TeX-source-correlate-method 'synctex
       TeX-source-correlate-mode t

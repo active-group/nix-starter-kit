@@ -10,28 +10,31 @@
 
   config = lib.mkIf config.active-group.nix-starter-kit.enable {
     home = {
-      packages = with pkgs; [
-        bat
-        curl
-        fd
-        gnupg
-        gnutls
-        khard
-        nixVersions.latest
-        openssh
-        pandoc
-        ripgrep
-        rsync
-        sieve-connect
-        sshpass
-        subversion
-        texinfo
-        texlive.combined.scheme-full
-        unzip
-        wget
-        xz
-        zip
-      ];
+      packages =
+        with pkgs;
+        [
+          bat
+          curl
+          fd
+          gnupg
+          gnutls
+          khard
+          nixVersions.latest
+          openssh
+          pandoc
+          ripgrep
+          rsync
+          sieve-connect
+          sshpass
+          subversion
+          texinfo
+          texlive.combined.scheme-full
+          unzip
+          wget
+          xz
+          zip
+        ]
+        ++ lib.optional stdenv.isLinux evince;
     };
 
     programs = {
