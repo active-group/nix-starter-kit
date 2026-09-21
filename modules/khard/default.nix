@@ -58,7 +58,16 @@ in
       }
     ];
 
-    programs.khard.enable = true;
+    programs.khard  = {
+      enable = true;
+      settings = {
+        vcard = {
+          # Stored in the vCard as X-Homepage, X-Category, ...
+          # Labels may only contain letters, digits and "-"
+          private_objects = [ "Homepage" "Category" "AG-Christmas" "Salutation" ];
+        };
+      };
+    };
 
     accounts.contact.accounts = lib.mapAttrs (_name: ab: {
       local.path = ab.path;
