@@ -133,8 +133,11 @@ in
             fi
 
             ${tt}/bin/kimai-config-sync "''${CMD}" -u ${cfg.timetracking-url} -k "''${TIMETRACKING_APIKEY}" -c "''${ABRECHENBARE_ZEITEN_EDN}" -c "''${ARBEITSZEITEN_EDN}"
+            ${tt}/bin/add-all-users-to-team-all.sh "''${CMD}" ${cfg.timetracking-url} "''${TIMETRACKING_APIKEY}"
             ${tt}/bin/kimai-config-sync "''${CMD}" -u ${cfg.abrechenbare-zeiten-url} -k "''${ABRECHENBARE_ZEITEN_APIKEY}" -c "''${ABRECHENBARE_ZEITEN_EDN}"
+            ${tt}/bin/add-all-users-to-team-all.sh "''${CMD}" ${cfg.abrechenbare-zeiten-url} "''${ABRECHENBARE_ZEITEN_APIKEY}"
             ${tt}/bin/kimai-config-sync "''${CMD}" -u ${cfg.arbeitszeiten-url} -k "''${ARBEITSZEITEN_APIKEY}" -c "''${ARBEITSZEITEN_EDN}"
+            ${tt}/bin/add-all-users-to-team-all.sh "''${CMD}" ${cfg.arbeitszeiten-url} "''${ARBEITSZEITEN_APIKEY}"
           '';
         tt-sync = wrap-url-token-token-token-script "tt-sync" "${tt}/bin/sync.sh" "${cfg.timetracking-url
         }" "${cfg.timetracking-token}" "${cfg.arbeitszeiten-token}" "${cfg.abrechenbare-zeiten-token}";
