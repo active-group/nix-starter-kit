@@ -34,7 +34,7 @@
           xz
           zip
         ]
-        ++ lib.optional stdenv.isLinux evince;
+        ++ lib.optional stdenv.hostPlatform.isLinux evince;
     };
 
     programs = {

@@ -17,7 +17,7 @@ in
     # this belongs with mac-app-util (but difficult to do there) delete the Mac
     # trampolines so they get re-created, which sometimes fixes problems
     home.activation = {
-      ${if pkgs.stdenv.isDarwin then "deleteMacAppTrampolines" else null} = lib.hm.dag.entryBefore [
+      ${if pkgs.stdenv.hostPlatform.isDarwin then "deleteMacAppTrampolines" else null} = lib.hm.dag.entryBefore [
         "trampolineApps"
       ] ''$DRY_RUN_CMD rm -rf "$HOME/Applications/Home Manager Trampolines"'';
     };
