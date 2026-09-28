@@ -5,11 +5,8 @@ env:
   NIX_PATH: "nixpkgs=channel:nixos-unstable"
 
 jobs:
-  test-build:
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, macos-latest ]
-    runs-on: ${{ matrix.os }}
+  macOS-build:
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
@@ -17,3 +14,13 @@ jobs:
         run: nix flake new --template .# /tmp/blub
       - name: build the home configuration
         run: cd /tmp/blub && nix build .#homeConfigurations.sperber.activationPackage -L -j auto
+
+  linux-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: create user flake from template
+        run: nix flake new --template .# /tmp/blub
+      - name: build the home configuration
+        run: cd /tmp/blub && nix build .#homeConfigurations.maier.activationPackage -L -j auto
