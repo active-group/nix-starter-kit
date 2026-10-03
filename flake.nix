@@ -37,9 +37,11 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfree = true;
-            problems.handlers = {
-              sbcl.broken = "warn";
+            config = {
+              allowUnfree = true;
+              problems.handlers = {
+                sbcl.broken = "warn";
+              };
             };
           };
         in
