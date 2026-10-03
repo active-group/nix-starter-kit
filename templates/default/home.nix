@@ -6,7 +6,7 @@ let
   # in the starter kit flake
   stateVersion = settings.stateVersion or "25.05";
   inherit (settings) username;
-  homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+  homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
 in
 {
   home = {
@@ -24,7 +24,7 @@ in
   # NOTE: Change things to your liking here!
   active-group = {
     nix-starter-kit.enable = true;
-    mac-app-util.enable = pkgs.stdenv.isDarwin;
+    mac-app-util.enable = pkgs.stdenv.hostPlatform.isDarwin;
     controlling.enable = false;
     emacs = {
       enable = true;

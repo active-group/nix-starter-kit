@@ -77,7 +77,7 @@
     url = "https://calendar.active-group.de/hasse/71716932-DA24-4AC6-9E4B-A66921A7F05B";
   };
   till = {
-    name = "Till Rauch";
+    name = "Till Rauch-Müller";
     url = "https://calendar.active-group.de/rauch/17046827-2165-4136-B4D4-13AD9ADA1810";
   };
   tobias = {
