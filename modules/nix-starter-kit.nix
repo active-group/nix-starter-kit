@@ -14,6 +14,7 @@
         with pkgs;
         [
           bat
+          coreutils
           curl
           fd
           gnupg
