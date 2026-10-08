@@ -39,10 +39,7 @@
             inherit system;
             config = {
               allowUnfree = true;
-              problems.handlers = {
-                sbcl.broken = "warn";
-              };
-            };
+           };
           };
         in
         {
