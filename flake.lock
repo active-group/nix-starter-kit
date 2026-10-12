@@ -52,11 +52,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1790247845,
-        "narHash": "sha256-5rrjz53DI9lCyIdylWPX5sNZQWWMboLpGyqOPj7s0Xc=",
+        "lastModified": 1791785894,
+        "narHash": "sha256-JlS/Dk2F1lQZWQ6XU/1CN93k1EDfONstergBoXwlIrk=",
         "ref": "refs/heads/main",
-        "rev": "938ee0054471fe1bd847d3fea09135815e463f19",
-        "revCount": 285,
+        "rev": "b4c2d461d14ff57c9b1713989420d563f750f50c",
+        "revCount": 286,
         "type": "git",
         "url": "ssh://git@gitlab.active-group.de/ag/active-timetracking.git"
       },
